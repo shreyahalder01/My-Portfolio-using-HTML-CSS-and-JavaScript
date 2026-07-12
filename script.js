@@ -1,4 +1,8 @@
-// Modern Portfolio JavaScript with Dynamic Features
+// Portfolio JavaScript
+// Modules: theme, navigation, scroll progress, reveal animations,
+// skills meter, contact form, project card interaction
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Theme Management
 class ThemeManager {
@@ -7,19 +11,18 @@ class ThemeManager {
     }
 
     init() {
-        // Check for saved theme preference or default to light mode
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        this.setTheme(savedTheme);
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            this.setTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            this.setTheme('dark');
+        } else {
+            this.setTheme('light');
+        }
 
-        // Add event listener to theme toggle button
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
             themeToggle.addEventListener('click', () => this.toggleTheme());
-        }
-
-        // Check for system dark mode preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme')) {
-            this.setTheme('dark');
         }
     }
 
@@ -35,24 +38,39 @@ class ThemeManager {
     }
 }
 
-// Navigation Manager
+// Navigation Manager (desktop scroll-spy, navbar elevation, mobile menu)
 class NavigationManager {
     constructor() {
+        this.navbar = document.getElementById('navbar');
+        this.hamburger = document.getElementById('hamburger');
+        this.navLinksList = document.getElementById('nav-links');
+        this.navBackdrop = document.getElementById('nav-backdrop');
         this.init();
     }
 
     init() {
-        // Add smooth scrolling to navigation links
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => this.handleNavClick(e));
         });
 
-        // Highlight active section on scroll
-        window.addEventListener('scroll', () => this.highlightActiveSection());
+        window.addEventListener('scroll', utils.throttle(() => {
+            this.highlightActiveSection();
+            this.handleNavbarScroll();
+        }, 100));
 
-        // Add navbar scroll effect
-        window.addEventListener('scroll', () => this.handleNavbarScroll());
+        if (this.hamburger) {
+            this.hamburger.addEventListener('click', () => this.toggleMobileMenu());
+        }
+        if (this.navBackdrop) {
+            this.navBackdrop.addEventListener('click', () => this.closeMobileMenu());
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') this.closeMobileMenu();
+        });
+
+        // Run once on load in case the page opens mid-scroll (refresh)
+        this.handleNavbarScroll();
     }
 
     handleNavClick(e) {
@@ -60,12 +78,30 @@ class NavigationManager {
         const targetId = e.target.getAttribute('href');
         const targetSection = document.querySelector(targetId);
 
+        this.closeMobileMenu();
+
         if (targetSection) {
             targetSection.scrollIntoView({
-                behavior: 'smooth',
+                behavior: prefersReducedMotion ? 'auto' : 'smooth',
                 block: 'start'
             });
         }
+    }
+
+    toggleMobileMenu() {
+        const isOpen = this.navLinksList.classList.toggle('open');
+        this.hamburger.classList.toggle('active', isOpen);
+        this.hamburger.setAttribute('aria-expanded', String(isOpen));
+        if (this.navBackdrop) this.navBackdrop.classList.toggle('open', isOpen);
+        document.body.classList.toggle('no-scroll', isOpen);
+    }
+
+    closeMobileMenu() {
+        this.navLinksList.classList.remove('open');
+        this.hamburger.classList.remove('active');
+        this.hamburger.setAttribute('aria-expanded', 'false');
+        if (this.navBackdrop) this.navBackdrop.classList.remove('open');
+        document.body.classList.remove('no-scroll');
     }
 
     highlightActiveSection() {
@@ -92,30 +128,48 @@ class NavigationManager {
     }
 
     handleNavbarScroll() {
-        const navbar = document.getElementById('navbar');
-        if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = 'none';
-        }
+        if (!this.navbar) return;
+        // Use a class instead of inline styles so light/dark theme colors
+        // (defined in CSS) are respected instead of being overwritten.
+        this.navbar.classList.toggle('scrolled', window.scrollY > 40);
     }
 }
 
-// Skills Animation Manager
-class SkillsAnimationManager {
+// Scroll progress bar
+class ScrollProgressManager {
     constructor() {
+        this.bar = document.getElementById('scroll-progress');
+        if (!this.bar) return;
         this.init();
     }
 
     init() {
-        // Create intersection observer for skill bars
+        window.addEventListener('scroll', utils.throttle(() => this.update(), 20));
+        window.addEventListener('resize', utils.throttle(() => this.update(), 100));
+        this.update();
+    }
+
+    update() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+        this.bar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+    }
+}
+
+// Skills Animation Manager — animates bar width and counts the percentage up
+class SkillsAnimationManager {
+    constructor() {
+        this.animated = false;
+        this.init();
+    }
+
+    init() {
         const skillsSection = document.querySelector('.skills');
         if (skillsSection) {
             const observer = new IntersectionObserver(
                 (entries) => this.handleSkillsIntersection(entries),
-                { threshold: 0.5 }
+                { threshold: 0.4 }
             );
             observer.observe(skillsSection);
         }
@@ -123,33 +177,63 @@ class SkillsAnimationManager {
 
     handleSkillsIntersection(entries) {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !this.animated) {
+                this.animated = true;
                 this.animateSkillBars();
             }
         });
     }
 
     animateSkillBars() {
-        const skillBars = document.querySelectorAll('.skill-progress');
+        const skillItems = document.querySelectorAll('.skill-item');
 
-        skillBars.forEach(bar => {
-            const progress = bar.getAttribute('data-progress');
-            bar.style.width = progress + '%';
+        skillItems.forEach(item => {
+            const bar = item.querySelector('.skill-progress');
+            const label = item.querySelector('.skill-percentage');
+            if (!bar) return;
+
+            const target = parseInt(bar.getAttribute('data-progress'), 10) || 0;
+            bar.style.width = target + '%';
             bar.classList.add('animated');
+
+            if (label && !prefersReducedMotion) {
+                this.countUp(label, target);
+            } else if (label) {
+                label.textContent = target + '%';
+            }
         });
+    }
+
+    countUp(el, target) {
+        const duration = 1200;
+        const start = performance.now();
+
+        const step = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = Math.round(eased * target);
+            el.textContent = value + '%';
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            }
+        };
+
+        requestAnimationFrame(step);
     }
 }
 
 // Contact Form Manager
 class ContactFormManager {
     constructor() {
+        this.form = document.getElementById('contactForm');
+        this.status = document.getElementById('form-status');
         this.init();
     }
 
     init() {
-        const form = document.getElementById('contactForm');
-        if (form) {
-            form.addEventListener('submit', (e) => this.handleFormSubmit(e));
+        if (this.form) {
+            this.form.addEventListener('submit', (e) => this.handleFormSubmit(e));
         }
     }
 
@@ -164,7 +248,8 @@ class ContactFormManager {
             message: formData.get('message')
         };
 
-        // Validate form
+        this.clearFieldErrors();
+
         if (this.validateForm(data)) {
             this.submitForm(data);
         }
@@ -173,22 +258,22 @@ class ContactFormManager {
     validateForm(data) {
         const errors = [];
 
-        if (!data.name.trim()) {
-            errors.push('Name is required');
+        if (!data.name || !data.name.trim()) {
+            errors.push({ field: 'name', message: 'Name is required' });
         }
 
-        if (!data.email.trim()) {
-            errors.push('Email is required');
+        if (!data.email || !data.email.trim()) {
+            errors.push({ field: 'email', message: 'Email is required' });
         } else if (!this.isValidEmail(data.email)) {
-            errors.push('Please enter a valid email address');
+            errors.push({ field: 'email', message: 'Enter a valid email address' });
         }
 
-        if (!data.subject.trim()) {
-            errors.push('Subject is required');
+        if (!data.subject || !data.subject.trim()) {
+            errors.push({ field: 'subject', message: 'Subject is required' });
         }
 
-        if (!data.message.trim()) {
-            errors.push('Message is required');
+        if (!data.message || !data.message.trim()) {
+            errors.push({ field: 'message', message: 'Message is required' });
         }
 
         if (errors.length > 0) {
@@ -204,93 +289,121 @@ class ContactFormManager {
         return emailRegex.test(email);
     }
 
-    showErrors(errors) {
-        // Remove existing error messages
-        const existingErrors = document.querySelectorAll('.error-message');
-        existingErrors.forEach(error => error.remove());
-
-        // Show new errors
-        errors.forEach(error => {
-            const errorElement = document.createElement('div');
-            errorElement.className = 'error-message';
-            errorElement.style.color = '#ef4444';
-            errorElement.style.margin = '0.5rem 0';
-            errorElement.textContent = error;
-
-            const form = document.getElementById('contactForm');
-            form.insertBefore(errorElement, form.firstChild);
+    clearFieldErrors() {
+        document.querySelectorAll('.form-group.has-error').forEach(group => {
+            group.classList.remove('has-error');
         });
     }
 
-    submitForm(data) {
-        const submitButton = document.querySelector('#contactForm button[type="submit"]');
-        const originalText = submitButton.textContent;
+    showErrors(errors) {
+        errors.forEach(err => {
+            const input = document.getElementById(err.field);
+            if (input) {
+                input.closest('.form-group').classList.add('has-error');
+            }
+        });
 
-        // Show loading state
-        submitButton.textContent = 'Sending...';
-        submitButton.disabled = true;
-
-        // Simulate form submission (replace with actual submission logic)
-        setTimeout(() => {
-            this.showSuccess();
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-            document.getElementById('contactForm').reset();
-        }, 2000);
+        this.setStatus(errors.map(e => e.message).join(' · '), 'error');
     }
 
-    showSuccess() {
-        // Remove existing messages
-        const existingMessages = document.querySelectorAll('.success-message, .error-message');
-        existingMessages.forEach(msg => msg.remove());
+    submitForm(data) {
+        const submitButton = this.form.querySelector('button[type="submit"]');
+        const originalText = submitButton ? submitButton.textContent : 'Send Message';
 
-        // Show success message
-        const successElement = document.createElement('div');
-        successElement.className = 'success-message';
-        successElement.style.color = '#10b981';
-        successElement.style.margin = '1rem 0';
-        successElement.style.padding = '1rem';
-        successElement.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
-        successElement.style.borderRadius = '8px';
-        successElement.style.border = '1px solid rgba(16, 185, 129, 0.3)';
-        successElement.textContent = 'Thank you for your message! I will get back to you soon.';
+        if (submitButton) {
+            submitButton.textContent = 'Opening mail app…';
+            submitButton.disabled = true;
+        }
 
-        const form = document.getElementById('contactForm');
-        form.insertBefore(successElement, form.firstChild);
+        const recipient = 'shreyahalder013@gmail.com';
+        const subject = `Portfolio Contact: ${data.subject}`;
+        const body = `Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`;
+        const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-        // Remove success message after 5 seconds
-        setTimeout(() => {
-            successElement.remove();
-        }, 5000);
+        const mailClient = window.open(mailtoLink, '_blank');
+        if (!mailClient) {
+            window.location.href = mailtoLink;
+        }
+
+        this.setStatus('Your email app should open with your message ready to send. If it does not, email me directly at shreyahalder013@gmail.com.', 'success');
+
+        if (submitButton) {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        }
+
+        this.form.reset();
+    }
+
+    setStatus(message, type) {
+        if (!this.status) return;
+        this.status.textContent = message;
+        this.status.className = `form-status visible ${type}`;
+
+        if (type === 'success') {
+            setTimeout(() => {
+                this.status.classList.remove('visible');
+            }, 6000);
+        }
     }
 }
 
-// Animation Observer for scroll-triggered animations
-class AnimationObserver {
+// Reveal Observer — staggered fade-up for sections and their children
+class RevealObserver {
     constructor() {
         this.init();
     }
 
     init() {
-        // Create intersection observer for fade-in animations
+        const targets = document.querySelectorAll('.reveal');
+
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+            targets.forEach(el => el.classList.add('fade-in-up'));
+            return;
+        }
+
         const observer = new IntersectionObserver(
-            (entries) => this.handleIntersection(entries),
-            { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+            (entries) => this.handleIntersection(entries, observer),
+            { threshold: 0.12, rootMargin: '0px 0px -80px 0px' }
         );
 
-        // Observe all sections
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            observer.observe(section);
-        });
+        targets.forEach(el => observer.observe(el));
     }
 
-    handleIntersection(entries) {
+    handleIntersection(entries, observer) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('fade-in-up');
+                observer.unobserve(entry.target);
             }
         });
+    }
+}
+
+// Project card tilt — subtle, disabled for reduced motion / touch
+class ProjectCardTilt {
+    constructor() {
+        if (prefersReducedMotion || window.matchMedia('(pointer: coarse)').matches) return;
+        this.cards = document.querySelectorAll('.project-card');
+        this.init();
+    }
+
+    init() {
+        this.cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => this.handleMove(e, card));
+            card.addEventListener('mouseleave', () => this.reset(card));
+        });
+    }
+
+    handleMove(e, card) {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(800px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 4).toFixed(2)}deg) translateY(-4px)`;
+    }
+
+    reset(card) {
+        card.style.transform = '';
     }
 }
 
@@ -301,7 +414,6 @@ class PortfolioApp {
     }
 
     init() {
-        // Wait for DOM to be loaded
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.initializeApp());
         } else {
@@ -310,86 +422,54 @@ class PortfolioApp {
     }
 
     initializeApp() {
-        // Initialize all managers
         this.themeManager = new ThemeManager();
         this.navigationManager = new NavigationManager();
+        this.scrollProgressManager = new ScrollProgressManager();
         this.skillsAnimationManager = new SkillsAnimationManager();
         this.contactFormManager = new ContactFormManager();
-        this.animationObserver = new AnimationObserver();
+        this.revealObserver = new RevealObserver();
+        this.projectCardTilt = new ProjectCardTilt();
 
-        // Add loading class removal
         document.body.classList.remove('loading');
 
-        // Add smooth scroll polyfill for older browsers
-        this.addSmoothScrollPolyfill();
-
-        // Initialize other features
-        this.initializeTypewriterEffect();
-        this.initializeParallaxEffect();
+        this.setFooterYear();
+        this.initializeSubtitleReveal();
     }
 
-    addSmoothScrollPolyfill() {
-        // Add smooth scrolling for browsers that don't support it
-        if (!('scrollBehavior' in document.documentElement.style)) {
-            // Load smooth scroll polyfill
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js';
-            document.head.appendChild(script);
+    setFooterYear() {
+        const yearEl = document.getElementById('year');
+        if (yearEl) {
+            yearEl.textContent = new Date().getFullYear();
         }
     }
 
-    initializeTypewriterEffect() {
-        // Simple typewriter effect for hero subtitle
+    initializeSubtitleReveal() {
         const subtitle = document.querySelector('.hero-subtitle');
-        if (subtitle) {
-            const text = subtitle.textContent;
-            subtitle.textContent = '';
+        if (!subtitle) return;
 
-            let i = 0;
-            const typeWriter = () => {
-                if (i < text.length) {
-                    subtitle.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
-            };
-
-            // Start typewriter effect after a delay
-            setTimeout(typeWriter, 1000);
+        if (prefersReducedMotion) {
+            return;
         }
-    }
 
-    initializeParallaxEffect() {
-        // Simple parallax effect for hero section
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const parallax = scrolled * 0.5;
-                hero.style.transform = `translateY(${parallax}px)`;
-            });
-        }
+        const text = subtitle.textContent;
+        subtitle.setAttribute('aria-label', text);
+        subtitle.textContent = '';
+
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                subtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 45);
+            }
+        };
+
+        setTimeout(typeWriter, 500);
     }
 }
 
-// Initialize the application
-const app = new PortfolioApp();
-
-// Export for testing or external use
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        ThemeManager,
-        NavigationManager,
-        SkillsAnimationManager,
-        ContactFormManager,
-        AnimationObserver,
-        PortfolioApp
-    };
-}
-
-// Additional utility functions
+// Utility functions
 const utils = {
-    // Debounce function for performance optimization
     debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -402,10 +482,9 @@ const utils = {
         };
     },
 
-    // Throttle function for scroll events
     throttle(func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
@@ -416,7 +495,6 @@ const utils = {
         };
     },
 
-    // Check if element is in viewport
     isInViewport(element) {
         const rect = element.getBoundingClientRect();
         return (
@@ -428,7 +506,23 @@ const utils = {
     }
 };
 
-// Add keyboard navigation support
+// Initialize the application
+const app = new PortfolioApp();
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        ThemeManager,
+        NavigationManager,
+        ScrollProgressManager,
+        SkillsAnimationManager,
+        ContactFormManager,
+        RevealObserver,
+        ProjectCardTilt,
+        PortfolioApp
+    };
+}
+
+// Keyboard navigation affordance
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Tab') {
         document.body.classList.add('keyboard-navigation');
