@@ -3,163 +3,204 @@
    Desktop-first overrides for style.css
    ========================================================================== */
 
-@media screen and (max-width: 1100px) {
-    .hero-text h1 {
-        font-size: 2.9rem;
+/* Keep the icon stack from spilling past the viewport on short screens */
+@media screen and (max-height: 640px) {
+    .desktop-icons {
+        top: 66px;
+        gap: 0.3rem;
+        max-height: calc(100vh - 100px);
+        max-height: calc(100dvh - 100px);
     }
 
-    .about-content {
-        gap: 2.2rem;
-        padding: 2.2rem;
+    .desktop-icon {
+        width: 78px;
+        padding: 0.35rem 0.2rem;
+    }
+
+    .icon-visual {
+        width: 34px;
+        height: 34px;
+    }
+
+    .icon-label {
+        font-size: 0.66rem;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .menubar {
+        padding: 0 16px;
+    }
+
+    .menubar-left {
+        gap: 1rem;
+    }
+
+    .menubar-nav {
+        gap: 1.1rem;
+    }
+
+    .menubar-link {
+        font-size: 0.85rem;
     }
 }
 
 @media screen and (max-width: 900px) {
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: min(320px, 80vw);
-        background: var(--bg-color);
-        border-left: 1px solid var(--border-color);
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 2rem;
-        padding: 2rem 2.5rem;
-        margin: 0;
-        transform: translateX(100%);
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1000;
-    }
-
-    .nav-links.open {
-        transform: translateX(0);
-        box-shadow: -20px 0 40px var(--shadow);
-    }
-
-    .nav-link {
-        font-size: 1rem;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-backdrop {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.4);
-        z-index: 998;
-    }
-
-    .nav-backdrop.open {
-        display: block;
-    }
-}
-
-@media screen and (max-width: 860px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2.5rem;
-    }
-
-    .hero-eyebrow {
-        justify-content: center;
-    }
-
-    .hero-image {
-        order: -1;
-    }
-
-    .hero-description {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .about-content {
+    .about-columns {
         grid-template-columns: 1fr;
     }
 
     .about-image {
         order: -1;
-        max-width: 320px;
+    }
+
+    .polaroid {
+        max-width: 160px;
         margin: 0 auto;
     }
 
-    .skills-content {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-content {
-        grid-template-columns: 1fr;
+    .window--wide {
+        width: min(88vw, 720px);
     }
 }
 
-@media screen and (max-width: 600px) {
-    :root {
-        --section-padding: 5rem 0;
+@media screen and (max-width: 720px) {
+    .menubar-nav {
+        display: none;
     }
 
-    .hero-text h1 {
-        font-size: 2.3rem;
+    .menubar-brand {
+        font-size: 1.05rem;
     }
 
-    .section-title {
-        font-size: 1.9rem;
+    .wallpaper-picker-label {
+        display: none;
     }
 
-    .logo {
-        font-size: 1.15rem;
+    .wallpaper-picker {
+        padding: 0.3rem 0.5rem;
     }
 
-    .about-content,
-    .contact-form {
-        padding: 1.5rem;
+    .status-pill span:last-child,
+    .status-pill {
+        font-size: 0;
+        padding: 0;
+        background: none;
+        border: none;
+        gap: 0;
     }
 
-    .spec-row {
-        flex-direction: column;
-        gap: 0.2rem;
+    .status-dot {
+        display: none;
     }
 
-    .spec-row dd {
-        text-align: left;
+    .desktop-icons {
+        top: 66px;
+        left: 12px;
+        gap: 0.3rem;
+        max-height: calc(100vh - 118px);
+        max-height: calc(100dvh - 118px);
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .desktop-icon {
+        width: 76px;
+        padding: 0.4rem 0.2rem;
     }
 
-    .project-links {
-        flex-direction: column;
+    .icon-visual {
+        width: 38px;
+        height: 38px;
     }
 
-    .project-links .btn {
-        flex: none;
+    .icon-label {
+        font-size: 0.68rem;
     }
 
-    .footer-inner {
-        flex-direction: column;
-        text-align: center;
+    /* Windows become full-screen sheets on small viewports */
+    .window,
+    .window--wide {
+        top: 54px;
+        left: 0;
+        width: 100vw;
+        max-height: none;
+        height: calc(100vh - 54px);
+        height: calc(100dvh - 54px);
+        border-radius: 0;
+        transform: translate(0, 12px);
+    }
+
+    .window.visible {
+        transform: translate(0, 0);
+    }
+
+    .window-body {
+        padding: 1.3rem 1.2rem 6rem;
+    }
+
+    .dock {
+        bottom: 12px;
+    }
+
+    .dock-inner {
+        gap: 0.35rem;
+        padding: 0.45rem 0.6rem;
+    }
+
+    .dock-item {
+        width: 38px;
+        height: 38px;
+    }
+
+    .dock-item::after {
+        display: none;
+    }
+
+    .desktop-watermark {
+        display: none;
     }
 }
 
 @media screen and (max-width: 420px) {
-    .container {
-        padding: 0 16px;
+    .welcome-modal {
+        padding: 2rem 1.4rem 1.6rem;
     }
 
-    .hero-text h1 {
-        font-size: 2rem;
+    .welcome-title {
+        font-size: 1.3rem;
     }
 
-    .theme-toggle,
-    .hamburger {
-        width: 38px;
-        height: 38px;
+    .menubar {
+        padding: 0 12px;
+    }
+
+    .menubar-brand {
+        font-size: 0.95rem;
+    }
+
+    .menubar-clock {
+        font-size: 0.72rem;
+    }
+
+    .wallpaper-picker {
+        padding: 0.25rem 0.4rem;
+        gap: 0;
+    }
+
+    .wallpaper-swatches {
+        gap: 0.3rem;
+    }
+
+    .wallpaper-swatch {
+        width: 13px;
+        height: 13px;
+    }
+
+    .desktop-icon {
+        width: 68px;
+    }
+
+    .icon-label {
+        font-size: 0.62rem;
+        padding: 1px 5px;
     }
 }
