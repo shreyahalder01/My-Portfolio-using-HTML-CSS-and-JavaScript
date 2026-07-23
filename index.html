@@ -2,13 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="./assets/mainlogo.png" type="image/icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shreya Halder — Portfolio</title>
-    <meta name="description" content="Shreya Halder - MCA Student & Web Developer specializing in AI evaluation, data quality assurance, and structured data workflows">
+
+    <!-- Primary SEO -->
+    <title>Shreya Halder's Portfolio</title>
+    <meta name="title" content="Shreya Halder — AI/ML Engineer & Full-Stack Developer Portfolio">
+    <meta name="description" content="Awwwards-inspired macOS interactive desktop portfolio of Shreya Halder, MCA student and AI/ML engineer specializing in generative AI, prompt engineering, and full-stack web development.">
+    <meta name="keywords" content="Shreya Halder, AI engineer, ML engineer, generative AI, prompt engineering, full-stack developer, MCA student, Chandigarh University, web developer portfolio, Lucknow developer, Morphix, Cyanotype, Aerophone">
+    <meta name="author" content="Shreya Halder">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="theme-color" content="#8b7cf6">
+    <link rel="canonical" href="https://shreyahalder01.github.io/My-Portfolio/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shreyahalder01.github.io/My-Portfolio/">
+    <meta property="og:site_name" content="Shreya Halder — Portfolio">
+    <meta property="og:title" content="Shreya Halder — AI/ML Engineer & Full-Stack Developer">
+    <meta property="og:description" content="MCA student and aspiring AI/ML engineer specializing in generative AI, prompt engineering, and full-stack development. Explore Morphix, Cyanotype, Aerophone, and more.">
+    <meta property="og:image" content="https://shreyahalder01.github.io/My-Portfolio/assets/profile-pic.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://shreyahalder01.github.io/My-Portfolio/">
+    <meta name="twitter:title" content="Shreya Halder — AI/ML Engineer & Full-Stack Developer">
+    <meta name="twitter:description" content="MCA student and aspiring AI/ML engineer specializing in generative AI, prompt engineering, and full-stack development.">
+    <meta name="twitter:image" content="https://shreyahalder01.github.io/My-Portfolio/assets/profile-pic.jpg">
+
+    <!-- Favicons -->
+    <link rel="icon" href="./assets/mainlogo.png" type="image/png">
+    <link rel="apple-touch-icon" href="./assets/mainlogo.png">
+    <link rel="manifest" href="./site.webmanifest">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Shreya Halder",
+        "url": "https://shreyahalder01.github.io/My-Portfolio/",
+        "image": "https://shreyahalder01.github.io/My-Portfolio/assets/profile-pic.jpg",
+        "jobTitle": "Aspiring AI/ML Engineer",
+        "description": "MCA student and aspiring AI/ML engineer specializing in generative AI, prompt engineering, AI evaluation, and full-stack web development.",
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Chandigarh University"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Lucknow",
+            "addressRegion": "Uttar Pradesh",
+            "addressCountry": "IN"
+        },
+        "sameAs": [
+            "https://github.com/shreyahalder01",
+            "https://www.linkedin.com/in/shreya-halder"
+        ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mediaqueries.css">
 </head>
@@ -17,6 +75,16 @@
     <!-- Icon sprite (hidden) -->
     <svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true">
         <defs>
+            <symbol id="icon-finder" viewBox="0 0 40 40">
+                <rect x="3" y="3" width="34" height="34" rx="8" fill="url(#finder-grad)"/>
+                <path d="M20 3v34M13 14c0 2 3.5 2 7 2s7 0 7-2M12 26c2.5 3 13.5 3 16 0" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>
+                <circle cx="13" cy="14" r="2" fill="#fff"/>
+                <circle cx="27" cy="14" r="2" fill="#fff"/>
+                <linearGradient id="finder-grad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#38bdf8"/>
+                    <stop offset="100%" stop-color="#2563eb"/>
+                </linearGradient>
+            </symbol>
             <symbol id="icon-folder" viewBox="0 0 48 40">
                 <path d="M4 8c0-2.2 1.8-4 4-4h9.5c1.1 0 2.1.5 2.8 1.3L23 9h17c2.2 0 4 1.8 4 4v21c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V8z" fill="currentColor"/>
                 <path d="M4 14h40v19c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V14z" fill="currentColor" opacity="0.001"/>
@@ -80,8 +148,61 @@
                 <circle cx="12" cy="15.2" r="1.5" fill="currentColor"/>
                 <path d="M12 16.7v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
             </symbol>
+            <symbol id="icon-terminal" viewBox="0 0 40 40">
+                <rect x="3" y="6" width="34" height="28" rx="5" fill="none" stroke="currentColor" stroke-width="2.6"/>
+                <path d="M10 15.5 16.5 20 10 24.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20.5 24.5h9.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            </symbol>
+            <symbol id="icon-wifi" viewBox="0 0 24 24">
+                <path d="M2.5 8.5a15 15 0 0 1 19 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M5.8 12.4a10.4 10.4 0 0 1 12.4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M9.1 16.2a5.8 5.8 0 0 1 5.8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="19.3" r="1.4" fill="currentColor"/>
+            </symbol>
+            <symbol id="icon-wifi-off" viewBox="0 0 24 24">
+                <path d="M2.5 8.5a15 15 0 0 1 8-3.9M21.5 8.5a15 15 0 0 0-4.3-2.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M5.8 12.4a10.4 10.4 0 0 1 6.1-2.7M18.2 12.4a10.4 10.4 0 0 0-2.4-1.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M9.1 16.2a5.8 5.8 0 0 1 5.8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="12" cy="19.3" r="1.4" fill="currentColor"/>
+                <path d="M1.5 1.5l21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </symbol>
+            <symbol id="icon-battery" viewBox="0 0 32 16">
+                <rect x="1" y="1.5" width="26" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <rect x="28.5" y="5.5" width="2.5" height="5" rx="1" fill="currentColor"/>
+                <rect class="battery-fill" x="3.2" y="3.5" width="21.6" height="9" rx="1.6" fill="currentColor"/>
+            </symbol>
+            <symbol id="icon-bolt" viewBox="0 0 24 24">
+                <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor"/>
+            </symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24">
+                <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/>
+                <path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            </symbol>
+            <symbol id="icon-sliders" viewBox="0 0 24 24">
+                <path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </symbol>
+            <symbol id="icon-sparkles" viewBox="0 0 24 24">
+                <path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2zM5 3l1 2.5L8.5 6.5 6 7.5 5 10l-1-2.5L1.5 6.5 4 5.5z" fill="currentColor"/>
+            </symbol>
+            <symbol id="icon-volume" viewBox="0 0 24 24">
+                <path d="M11 5L6 9H2v6h4l5 4V5zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            <symbol id="icon-volume-mute" viewBox="0 0 24 24">
+                <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
         </defs>
     </svg>
+
+    <!-- Boot screen -->
+    <div class="bootscreen" id="bootscreen" role="status" aria-label="Loading portfolio">
+        <div class="boot-mark">
+            <span class="boot-logo">SH</span>
+        </div>
+        <div class="boot-progress-track">
+            <div class="boot-progress-fill" id="boot-progress-fill"></div>
+        </div>
+        <p class="boot-status" id="boot-status">Starting up…</p>
+    </div>
 
     <!-- Lock screen -->
     <div class="lockscreen" id="lockscreen" role="dialog" aria-modal="true" aria-label="Locked screen">
@@ -90,16 +211,17 @@
             <div class="lock-time">
                 <time class="lock-date" id="lock-date">—</time>
                 <time class="lock-clock" id="lock-clock">--:--</time>
+                <span class="lock-timezone" id="lock-timezone">—</span>
             </div>
             <div class="lock-identity">
                 <div class="lock-avatar" aria-hidden="true">SH</div>
                 <h2 class="lock-name">Shreya Halder</h2>
-                <p class="lock-role">Web Developer</p>
+                <p class="lock-role">Web Developer &amp; MCA Student</p>
                 <button type="button" class="lock-unlock-btn" id="lock-unlock-btn">
                     <svg class="icon"><use href="#icon-lock"/></svg>
                     <span>Click to unlock</span>
                 </button>
-                <p class="lock-hint">Click anywhere to unlock</p>
+                <p class="lock-hint">Press Enter or click anywhere to unlock</p>
             </div>
         </div>
     </div>
@@ -108,22 +230,79 @@
     <div class="welcome-overlay" id="welcome-overlay" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-hidden="true">
         <div class="welcome-modal">
             <span class="welcome-glow" aria-hidden="true"></span>
-            <p class="welcome-eyebrow">✨ Booting up</p>
-            <h2 class="welcome-title" id="welcome-title">Welcome to Shreya's desktop.</h2>
-            <p class="welcome-text">Take a look around — every icon opens something worth exploring.</p>
-            <button type="button" class="btn btn-primary" id="welcome-close">Let's go</button>
+            <p class="welcome-eyebrow">✨ macOS Monterey Desktop</p>
+            <h2 class="welcome-title" id="welcome-title">Welcome to Shreya's Workspace</h2>
+            <p class="welcome-text">Explore interactive windows, press <kbd>⌘K</kbd> / <kbd>Ctrl+K</kbd> for Spotlight search, drag desktop icons, or open Finder &amp; Terminal.</p>
+            <button type="button" class="btn btn-primary" id="welcome-close">Get Started</button>
         </div>
     </div>
 
+    <!-- Spotlight Search Overlay -->
+    <div class="spotlight-overlay" id="spotlight-modal" role="dialog" aria-modal="true" aria-label="Spotlight Search" aria-hidden="true">
+        <div class="spotlight-dialog">
+            <div class="spotlight-input-wrapper">
+                <svg class="icon spotlight-icon"><use href="#icon-search"/></svg>
+                <input type="text" id="spotlight-input" class="spotlight-input" placeholder="Search apps, projects, skills, wallpaper, or commands…" autocomplete="off" spellcheck="false" aria-label="Spotlight search input">
+                <kbd class="spotlight-shortcut-hint">⌘K</kbd>
+            </div>
+            <div class="spotlight-results" id="spotlight-results" role="listbox">
+                <!-- Search results will populate dynamically via JS -->
+            </div>
+            <div class="spotlight-footer">
+                <span><kbd>↑</kbd> <kbd>↓</kbd> Navigate</span>
+                <span><kbd>↵</kbd> Select</span>
+                <span><kbd>ESC</kbd> Close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- macOS Control / Notification Center Panel -->
+    <div class="control-center-panel" id="notification-center" role="region" aria-label="Control Center" aria-hidden="true">
+        <div class="control-center-header">
+            <h3>Control Center</h3>
+            <button type="button" class="btn-icon-sm" id="close-control-center" aria-label="Close Control Center">✕</button>
+        </div>
+        <div class="control-center-grid">
+            <button type="button" class="cc-tile" id="cc-theme-toggle">
+                <svg class="icon"><use href="#icon-sun"/></svg>
+                <div class="cc-tile-info">
+                    <span class="cc-label">Display Mode</span>
+                    <span class="cc-value" id="cc-theme-val">Light Mode</span>
+                </div>
+            </button>
+            <button type="button" class="cc-tile" id="cc-wallpaper-toggle">
+                <svg class="icon"><use href="#icon-sparkles"/></svg>
+                <div class="cc-tile-info">
+                    <span class="cc-label">Wallpaper</span>
+                    <span class="cc-value" id="cc-wallpaper-val">Nebula</span>
+                </div>
+            </button>
+        </div>
+        <div class="control-center-widget">
+            <h4>GitHub Activity Matrix</h4>
+            <div class="github-heatmap" id="github-heatmap">
+                <!-- Matrix tiles generated by JS -->
+            </div>
+            <div class="cc-stat-row" style="margin-top:0.6rem;">
+                <span>Public Repos</span>
+                <span style="font-weight:600; font-family:var(--font-mono);">6 Repositories</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Snap Preview Area -->
+    <div class="snap-preview" id="snap-preview" aria-hidden="true"></div>
+
     <div class="desktop" id="desktop">
 
-        <!-- Wallpaper -->
-        <div class="wallpaper" aria-hidden="true">
+        <!-- Wallpaper background -->
+        <div class="wallpaper" id="wallpaper" aria-hidden="true">
             <span class="blob blob-1"></span>
             <span class="blob blob-2"></span>
             <span class="blob blob-3"></span>
             <span class="blob blob-4"></span>
             <span class="grain"></span>
+            <canvas id="wallpaper-canvas" class="wallpaper-canvas"></canvas>
         </div>
 
         <!-- Menu bar -->
@@ -139,10 +318,20 @@
                             <button type="button" class="menubar-menu-item" role="menuitem" data-window-action="front-all">Bring All to Front</button>
                         </div>
                     </div>
+                    <button type="button" class="menubar-link" data-open="about">About</button>
+                    <button type="button" class="menubar-link" data-open="projects">Projects</button>
+                    <button type="button" class="menubar-link" data-open="skills">Skills</button>
                     <button type="button" class="menubar-link" data-open="contact">Contact</button>
                 </nav>
             </div>
             <div class="menubar-right">
+                <button type="button" class="menubar-action-btn" id="audio-toggle" aria-label="Ambient Soundscape" title="Toggle Soundscape / Audio">
+                    <svg class="icon audio-icon-on"><use href="#icon-volume"/></svg>
+                    <svg class="icon audio-icon-off" style="display:none;"><use href="#icon-volume-mute"/></svg>
+                </button>
+                <button type="button" class="menubar-action-btn" id="spotlight-btn" aria-label="Search (Spotlight Cmd+K)" title="Spotlight Search (Cmd+K)">
+                    <svg class="icon"><use href="#icon-search"/></svg>
+                </button>
                 <div class="wallpaper-picker" data-wallpaper-picker>
                     <span class="wallpaper-picker-label">Wallpaper</span>
                     <div class="wallpaper-swatches">
@@ -153,16 +342,33 @@
                     </div>
                 </div>
                 <span class="status-pill"><span class="status-dot"></span>Open to opportunities</span>
-                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle night mode">
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle night mode" title="Toggle Light/Dark Theme">
                     <svg class="icon sun"><use href="#icon-sun"/></svg>
                     <svg class="icon moon"><use href="#icon-moon"/></svg>
                 </button>
-                <time class="menubar-clock" id="menubar-clock">--:--</time>
+                <button type="button" class="menubar-action-btn" id="control-center-btn" aria-label="Control Center" title="Control Center">
+                    <svg class="icon"><use href="#icon-sliders"/></svg>
+                </button>
+                <div class="system-status" id="system-status">
+                    <span class="status-chip status-chip--wifi" id="wifi-indicator" title="Connection status">
+                        <svg class="icon wifi-icon-on"><use href="#icon-wifi"/></svg>
+                        <svg class="icon wifi-icon-off"><use href="#icon-wifi-off"/></svg>
+                    </span>
+                    <span class="status-chip status-chip--battery" id="battery-indicator" title="Battery status">
+                        <svg class="icon battery-icon"><use href="#icon-battery"/></svg>
+                        <svg class="icon bolt-icon"><use href="#icon-bolt"/></svg>
+                        <span class="battery-label" id="battery-label"></span>
+                    </span>
+                </div>
+                <div class="menubar-clock" id="menubar-clock">
+                    <span class="clock-time" id="clock-time">--:--</span>
+                    <span class="clock-meta" id="clock-meta">--- -- · ---</span>
+                </div>
             </div>
         </header>
 
         <!-- Desktop icons -->
-        <div class="desktop-icons">
+        <div class="desktop-icons" id="desktop-icons">
             <button type="button" class="desktop-icon" data-open="about">
                 <span class="icon-visual icon-folder"><svg class="icon"><use href="#icon-folder"/></svg></span>
                 <span class="icon-label">About Me</span>
@@ -179,46 +385,122 @@
                 <span class="icon-visual icon-file"><svg class="icon"><use href="#icon-file"/></svg></span>
                 <span class="icon-label">Resume.pdf</span>
             </button>
-            <button type="button" class="desktop-icon" id="trash-icon">
+            <button type="button" class="desktop-icon" data-open="terminal">
+                <span class="icon-visual icon-terminal-visual"><svg class="icon"><use href="#icon-terminal"/></svg></span>
+                <span class="icon-label">Terminal</span>
+            </button>
+            <button type="button" class="desktop-icon" data-open="trash" id="trash-icon">
                 <span class="icon-visual icon-trash"><svg class="icon"><use href="#icon-trash"/></svg></span>
                 <span class="icon-label">Trash</span>
             </button>
         </div>
 
-        <!-- Windows -->
+        <!-- Windows Layer -->
         <div class="windows-layer" id="windows-layer">
+
+            <!-- Finder Window -->
+            <section class="window window--wide window--finder" data-window="finder" role="dialog" aria-label="Finder File Explorer" aria-hidden="true">
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                <div class="resize-handle resize-handle-nw"></div>
+                <div class="window-titlebar" data-drag-handle>
+                    <div class="traffic-lights">
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window" title="Close"></button>
+                        <button type="button" class="tl tl-min" data-minimize aria-label="Minimize window" title="Minimize"></button>
+                        <button type="button" class="tl tl-max" data-maximize aria-label="Maximize window" title="Maximize"></button>
+                    </div>
+                    <span class="window-title">Finder — Portfolio Directory</span>
+                </div>
+                <div class="window-body window-body--finder">
+                    <div class="finder-layout">
+                        <aside class="finder-sidebar">
+                            <div class="finder-sidebar-group">
+                                <h5>Favorites</h5>
+                                <ul>
+                                    <li class="active" data-folder="desktop"><svg class="icon"><use href="#icon-folder"/></svg> Desktop</li>
+                                    <li data-folder="projects"><svg class="icon"><use href="#icon-folder"/></svg> Projects</li>
+                                    <li data-folder="documents"><svg class="icon"><use href="#icon-doc"/></svg> Documents</li>
+                                </ul>
+                            </div>
+                        </aside>
+                        <main class="finder-content">
+                            <div class="finder-breadcrumb">
+                                <span>Macintosh HD</span> &gt; <span>Users</span> &gt; <span>shreya</span> &gt; <strong id="finder-current-path">Desktop</strong>
+                            </div>
+                            <div class="finder-file-grid" id="finder-file-grid">
+                                <!-- File items rendered by JS -->
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </section>
 
             <!-- About window -->
             <section class="window" data-window="about" role="dialog" aria-label="About Me" aria-hidden="true">
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                <div class="resize-handle resize-handle-nw"></div>
                 <div class="window-titlebar" data-drag-handle>
                     <div class="traffic-lights">
-                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
-                        <span class="tl tl-min" aria-hidden="true"></span>
-                        <span class="tl tl-max" aria-hidden="true"></span>
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window" title="Close"></button>
+                        <button type="button" class="tl tl-min" data-minimize aria-label="Minimize window" title="Minimize"></button>
+                        <button type="button" class="tl tl-max" data-maximize aria-label="Maximize window" title="Maximize"></button>
                     </div>
                     <span class="window-title">About Me</span>
                 </div>
                 <div class="window-body">
-                    <p class="window-eyebrow">Hi, I'm</p>
+                    <p class="window-eyebrow">Developer Profile</p>
                     <h2 class="window-heading">Shreya Halder</h2>
                     <p class="window-subtitle">MCA Student &amp; Web Developer</p>
                     <div class="about-columns">
                         <div class="about-text">
                             <p>Hi, I'm Shreya — a developer based in Lucknow, India, with a BCA (9.01 CGPA) and currently pursuing my MCA. I work at the intersection of AI evaluation, data quality, and full-stack development, from validating API outputs and refining AI prompts to building projects like Morphix, a mixed-media video studio with a pluggable AI pipeline, and Cyanotype, a browser-based photo-to-sun-print tool. I care about getting the details right — clean data, consistent outputs, and AI systems you can actually trust.</p>
+                            
+                            <div class="about-timeline">
+                                <h3>Education &amp; Experience</h3>
+                                <div class="timeline-item">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-year">2024 — 2026</span>
+                                        <h4>Master of Computer Applications (MCA)</h4>
+                                        <p>Focusing on Advanced Software Engineering, Generative AI Systems &amp; Web Architectures.</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <span class="timeline-dot"></span>
+                                    <div class="timeline-content">
+                                        <span class="timeline-year">2021 — 2024</span>
+                                        <h4>Bachelor of Computer Applications (BCA)</h4>
+                                        <p>Graduated with <strong>9.01 CGPA</strong>. Built foundations in Data Structures, Web Development, Python &amp; Java.</p>
+                                    </div>
+                                </div>
+                            </div>
+
                             <dl class="spec-sheet">
                                 <div class="spec-row">
-                                    <dt>Education</dt>
-                                    <dd>MCA (Master's Degree)</dd>
+                                    <dt>Degree</dt>
+                                    <dd>MCA (Master's)</dd>
                                 </div>
                                 <div class="spec-row">
-                                    <dt>Experience</dt>
-                                    <dd>Fresher</dd>
+                                    <dt>Specialization</dt>
+                                    <dd>AI/ML</dd>
                                 </div>
                                 <div class="spec-row">
-                                    <dt>Graduating</dt>
-                                    <dd>2028</dd>
+                                    <dt>Location</dt>
+                                    <dd>Lucknow, India</dd>
                                 </div>
                             </dl>
+
                             <div class="about-actions">
                                 <button type="button" class="btn btn-primary" data-open="contact">Get In Touch</button>
                                 <a href="./assets/Shreya_Halder_Resume.pdf" class="btn btn-secondary" download>Download CV</a>
@@ -239,22 +521,45 @@
 
             <!-- Projects window -->
             <section class="window window--wide" data-window="projects" role="dialog" aria-label="Projects" aria-hidden="true">
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                <div class="resize-handle resize-handle-nw"></div>
                 <div class="window-titlebar" data-drag-handle>
                     <div class="traffic-lights">
-                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
-                        <span class="tl tl-min" aria-hidden="true"></span>
-                        <span class="tl tl-max" aria-hidden="true"></span>
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window" title="Close"></button>
+                        <button type="button" class="tl tl-min" data-minimize aria-label="Minimize window" title="Minimize"></button>
+                        <button type="button" class="tl tl-max" data-maximize aria-label="Maximize window" title="Maximize"></button>
                     </div>
                     <span class="window-title">Projects</span>
                 </div>
                 <div class="window-body">
                     <p class="window-eyebrow">Selected work</p>
-                    <h2 class="window-heading">My Projects</h2>
-                    <div class="projects-grid">
-                        <div class="project-card">
+                    <h2 class="window-heading">Featured Projects</h2>
+                    
+                    <div class="projects-toolbar">
+                        <div class="projects-search-box">
+                            <svg class="icon"><use href="#icon-search"/></svg>
+                            <input type="text" id="project-search-input" placeholder="Search projects by name or stack..." aria-label="Search projects">
+                        </div>
+                        <div class="projects-filter-tags">
+                            <button type="button" class="filter-tag active" data-filter="all">All</button>
+                            <button type="button" class="filter-tag" data-filter="ai">AI &amp; ML</button>
+                            <button type="button" class="filter-tag" data-filter="fullstack">Full Stack</button>
+                            <button type="button" class="filter-tag" data-filter="tools">Web Tools</button>
+                            <button type="button" class="filter-tag" data-filter="games">Games</button>
+                        </div>
+                    </div>
+
+                    <div class="projects-grid" id="projects-grid">
+                        <div class="project-card" data-category="ai fullstack" data-tech="nextjs typescript python ai">
                             <div class="project-image">
                                 <span class="project-status">Repository</span>
-                                <img src="./assets/morphix.png" alt="Morphix">
+                                <img src="./assets/morphix.png" alt="Morphix" loading="lazy">
                             </div>
                             <div class="project-content">
                                 <h3>Morphix</h3>
@@ -270,19 +575,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card">
+
+                        <div class="project-card" data-category="tools" data-tech="javascript html css canvas">
                             <div class="project-image">
-                                <span class="project-status">Live</span>
-                                <img src="./assets/cyanotype.png" alt="Cyanotype">
+                                <span class="project-status">Live Demo</span>
+                                <img src="./assets/cyanotype.png" alt="Cyanotype" loading="lazy">
                             </div>
                             <div class="project-content">
                                 <h3>Cyanotype</h3>
-                                <p>A client-side image-processing tool that transforms photographs into cyanotype-style sun-prints, with adjustable exposure, toning, and paper-edge controls, plus real-time preview rendering.</p>
+                                <p>A client-side image-processing tool that transforms photographs into cyanotype-style sun-prints with real-time preview rendering.</p>
                                 <div class="project-tech">
                                     <span class="tech-label">stack:</span>
                                     <span class="tech-tag">JavaScript</span>
-                                    <span class="tech-tag">HTML</span>
-                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">Canvas API</span>
+                                    <span class="tech-tag">CSS3</span>
                                 </div>
                                 <div class="project-links">
                                     <a href="https://github.com/shreyahalder01/cyanotype" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
@@ -290,18 +596,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card">
+
+                        <div class="project-card" data-category="tools" data-tech="javascript html css ui">
                             <div class="project-image">
-                                <span class="project-status">Live</span>
-                                <img src="./assets/aerophone.png" alt="Aerophone">
+                                <span class="project-status">Live Demo</span>
+                                <img src="./assets/aerophone.png" alt="Aerophone" loading="lazy">
                             </div>
                             <div class="project-content">
                                 <h3>Aerophone</h3>
-                                <p>A modern project showcasing interactive web experiences and polished UI design with a focus on creative digital products.</p>
+                                <p>A modern web application showcasing interactive audio-visual experiences and refined UI component design.</p>
                                 <div class="project-tech">
                                     <span class="tech-label">stack:</span>
-                                    <span class="tech-tag">HTML</span>
-                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS3</span>
                                     <span class="tech-tag">JavaScript</span>
                                 </div>
                                 <div class="project-links">
@@ -310,19 +617,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card">
+
+                        <div class="project-card" data-category="fullstack" data-tech="javascript api css html">
                             <div class="project-image">
-                                <span class="project-status">Live</span>
-                                <img src="./assets/project-1.png" alt="Weather App">
+                                <span class="project-status">Live Demo</span>
+                                <img src="./assets/project-1.png" alt="Weather App" loading="lazy">
                             </div>
                             <div class="project-content">
                                 <h3>Weather App</h3>
-                                <p>A responsive weather application built with HTML, CSS, and JavaScript that provides real-time weather information for any city.</p>
+                                <p>A responsive weather application built with HTML, CSS, and JavaScript that provides real-time weather forecasts for global cities.</p>
                                 <div class="project-tech">
                                     <span class="tech-label">stack:</span>
-                                    <span class="tech-tag">HTML</span>
-                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">Fetch API</span>
                                     <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">CSS3</span>
                                 </div>
                                 <div class="project-links">
                                     <a href="https://github.com/shreyahalder01/Weather-App" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
@@ -330,18 +638,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card">
+
+                        <div class="project-card" data-category="tools" data-tech="html css flexbox">
                             <div class="project-image">
-                                <span class="project-status">Live</span>
-                                <img src="./assets/project-2.png" alt="Instagram Clone">
+                                <span class="project-status">Live Demo</span>
+                                <img src="./assets/project-2.png" alt="Instagram Clone" loading="lazy">
                             </div>
                             <div class="project-content">
-                                <h3>Instagram Clone</h3>
-                                <p>A pixel-perfect clone of Instagram's user interface created using HTML and CSS, showcasing advanced styling techniques.</p>
+                                <h3>Instagram UI Clone</h3>
+                                <p>A pixel-perfect responsive clone of Instagram's web interface created using vanilla HTML and CSS grid/flexbox layouts.</p>
                                 <div class="project-tech">
                                     <span class="tech-label">stack:</span>
-                                    <span class="tech-tag">HTML</span>
-                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">HTML5</span>
+                                    <span class="tech-tag">CSS Grid</span>
                                     <span class="tech-tag">Flexbox</span>
                                 </div>
                                 <div class="project-links">
@@ -350,19 +659,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="project-card">
+
+                        <div class="project-card" data-category="games" data-tech="javascript canvas html css">
                             <div class="project-image">
-                                <span class="project-status">Live</span>
-                                <img src="./assets/project-3.png" alt="Snake Game">
+                                <span class="project-status">Live Demo</span>
+                                <img src="./assets/project-3.png" alt="Snake Game" loading="lazy">
                             </div>
                             <div class="project-content">
-                                <h3>Snake Game</h3>
-                                <p>A classic Snake game implemented in JavaScript with smooth controls and score tracking functionality.</p>
+                                <h3>Classic Snake Game</h3>
+                                <p>A classic arcade Snake game implemented in JavaScript with responsive keyboard controls and high-score tracking.</p>
                                 <div class="project-tech">
                                     <span class="tech-label">stack:</span>
-                                    <span class="tech-tag">HTML</span>
-                                    <span class="tech-tag">CSS</span>
                                     <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">HTML5 Canvas</span>
+                                    <span class="tech-tag">CSS3</span>
                                 </div>
                                 <div class="project-links">
                                     <a href="https://github.com/shreyahalder01/snake-game" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
@@ -376,62 +686,67 @@
 
             <!-- Skills window -->
             <section class="window" data-window="skills" role="dialog" aria-label="Skills" aria-hidden="true">
+                <div class="resize-handle resize-handle-n"></div>
+       
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                <div class="resize-handle resize-handle-nw"></div>
                 <div class="window-titlebar" data-drag-handle>
                     <div class="traffic-lights">
-                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
-                        <span class="tl tl-min" aria-hidden="true"></span>
-                        <span class="tl tl-max" aria-hidden="true"></span>
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window" title="Close"></button>
+                        <button type="button" class="tl tl-min" data-minimize aria-label="Minimize window" title="Minimize"></button>
+                        <button type="button" class="tl tl-max" data-maximize aria-label="Maximize window" title="Maximize"></button>
                     </div>
                     <span class="window-title">Skills</span>
                 </div>
                 <div class="window-body">
                     <p class="window-eyebrow">Capabilities</p>
-                    <h2 class="window-heading">My Skills</h2>
+                    <h2 class="window-heading">Technical &amp; Soft Skills</h2>
                     <div class="skills-content">
                         <div class="skills-category">
-                            <h3>Technical Skills</h3>
+                            <h3>Languages &amp; Frameworks</h3>
                             <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">Python</span><span class="skill-percentage">0%</span></div>
-                                <div class="skill-bar"><div class="skill-progress" data-progress="30"></div></div>
+                                <div class="skill-info"><span class="skill-name">Python / AI Tools</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="85"></div></div>
                             </div>
                             <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">HTML</span><span class="skill-percentage">0%</span></div>
-                                <div class="skill-bar"><div class="skill-progress" data-progress="70"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">CSS</span><span class="skill-percentage">0%</span></div>
-                                <div class="skill-bar"><div class="skill-progress" data-progress="65"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">JavaScript</span><span class="skill-percentage">0%</span></div>
-                                <div class="skill-bar"><div class="skill-progress" data-progress="55"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">Java</span><span class="skill-percentage">0%</span></div>
-                                <div class="skill-bar"><div class="skill-progress" data-progress="50"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">C Programming</span><span class="skill-percentage">0%</span></div>
-                                <div class="skill-bar"><div class="skill-progress" data-progress="60"></div></div>
-                            </div>
-                        </div>
-                        <div class="skills-category">
-                            <h3>Soft Skills</h3>
-                            <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">Communication</span><span class="skill-percentage">0%</span></div>
-                                <div class="skill-bar"><div class="skill-progress" data-progress="100"></div></div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">Creative Writing</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-info"><span class="skill-name">JavaScript (ES6+)</span><span class="skill-percentage">0%</span></div>
                                 <div class="skill-bar"><div class="skill-progress" data-progress="80"></div></div>
                             </div>
                             <div class="skill-item">
-                                <div class="skill-info"><span class="skill-name">Problem Solving</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-info"><span class="skill-name">HTML5 &amp; CSS3</span><span class="skill-percentage">0%</span></div>
                                 <div class="skill-bar"><div class="skill-progress" data-progress="90"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Java</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="70"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">C Programming</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="75"></div></div>
+                            </div>
+                        </div>
+                        <div class="skills-category">
+                            <h3>Core Competencies</h3>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">AI Evaluation &amp; Prompting</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="90"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Problem Solving</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="95"></div></div>
                             </div>
                             <div class="skill-item">
                                 <div class="skill-info"><span class="skill-name">Team Collaboration</span><span class="skill-percentage">0%</span></div>
                                 <div class="skill-bar"><div class="skill-progress" data-progress="100"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Communication</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="95"></div></div>
                             </div>
                         </div>
                     </div>
@@ -440,17 +755,25 @@
 
             <!-- Resume window -->
             <section class="window" data-window="resume" role="dialog" aria-label="Resume" aria-hidden="true">
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                <div class="resize-handle resize-handle-nw"></div>
                 <div class="window-titlebar" data-drag-handle>
                     <div class="traffic-lights">
-                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
-                        <span class="tl tl-min" aria-hidden="true"></span>
-                        <span class="tl tl-max" aria-hidden="true"></span>
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window" title="Close"></button>
+                        <button type="button" class="tl tl-min" data-minimize aria-label="Minimize window" title="Minimize"></button>
+                        <button type="button" class="tl tl-max" data-maximize aria-label="Maximize window" title="Maximize"></button>
                     </div>
                     <span class="window-title">Resume.pdf</span>
                 </div>
                 <div class="window-body window-body--resume">
-                    <p class="window-eyebrow">Preview</p>
-                    <h2 class="window-heading">Resume</h2>
+                    <p class="window-eyebrow">Document Preview</p>
+                    <h2 class="window-heading">Curriculum Vitae</h2>
                     <div class="resume-frame">
                         <iframe src="./assets/Shreya_Halder_Resume.pdf" title="Shreya Halder's Resume" loading="lazy"></iframe>
                     </div>
@@ -463,11 +786,19 @@
 
             <!-- Contact window -->
             <section class="window" data-window="contact" role="dialog" aria-label="Contact" aria-hidden="true">
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                <div class="resize-handle resize-handle-nw"></div>
                 <div class="window-titlebar" data-drag-handle>
                     <div class="traffic-lights">
-                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
-                        <span class="tl tl-min" aria-hidden="true"></span>
-                        <span class="tl tl-max" aria-hidden="true"></span>
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window" title="Close"></button>
+                        <button type="button" class="tl tl-min" data-minimize aria-label="Minimize window" title="Minimize"></button>
+                        <button type="button" class="tl tl-max" data-maximize aria-label="Maximize window" title="Maximize"></button>
                     </div>
                     <span class="window-title">Mail — New Message</span>
                 </div>
@@ -478,7 +809,8 @@
                         <div class="contact-info">
                             <div class="contact-item">
                                 <strong>Email</strong>
-                                <a href="mailto:shreyahalder013@gmail.com">shreyahalder013@gmail.com</a>
+                                <a href="mailto:shreyahalder013@gmail.com" id="contact-email-link">shreyahalder013@gmail.com</a>
+                                <button type="button" class="btn-copy-sm" id="copy-email-btn" title="Copy Email">Copy</button>
                             </div>
                             <div class="contact-item">
                                 <strong>LinkedIn</strong>
@@ -515,12 +847,105 @@
                 </div>
             </section>
 
+            <!-- Terminal window -->
+            <section class="window window--wide window--terminal" data-window="terminal" role="dialog" aria-label="Terminal" aria-hidden="true">
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                <div class="resize-handle resize-handle-nw"></div>
+                <div class="window-titlebar" data-drag-handle>
+                    <div class="traffic-lights">
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window" title="Close"></button>
+                        <button type="button" class="tl tl-min" data-minimize aria-label="Minimize window" title="Minimize"></button>
+                        <button type="button" class="tl tl-max" data-maximize aria-label="Maximize window" title="Maximize"></button>
+                    </div>
+                    <span class="window-title">shreya@portfolio — zsh</span>
+                </div>
+                <div class="window-body window-body--terminal">
+                    <div class="terminal-output" id="terminal-output" aria-live="polite"></div>
+                    <div class="terminal-inputline">
+                        <span class="terminal-prompt">shreya@portfolio<span class="terminal-prompt-sep">:</span><span class="terminal-prompt-path">~</span><span class="terminal-prompt-dollar">$</span></span>
+                        <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trash Window -->
+            <section class="window window--wide window--trash" data-window="trash" role="dialog" aria-label="Trash Can" aria-hidden="true">
+                <div class="resize-handle resize-handle-n"></div>
+                <div class="resize-handle resize-handle-e"></div>
+                <div class="resize-handle resize-handle-s"></div>
+                <div class="resize-handle resize-handle-w"></div>
+                <div class="resize-handle resize-handle-ne"></div>
+                <div class="resize-handle resize-handle-se"></div>
+                <div class="resize-handle resize-handle-sw"></div>
+                <div class="resize-handle resize-handle-nw"></div>
+                <div class="window-titlebar" data-drag-handle>
+                    <div class="traffic-lights">
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window" title="Close"></button>
+                        <button type="button" class="tl tl-min" data-minimize aria-label="Minimize window" title="Minimize"></button>
+                        <button type="button" class="tl tl-max" data-maximize aria-label="Maximize window" title="Maximize"></button>
+                    </div>
+                    <span class="window-title" id="trash-window-title">Trash — 6 Items</span>
+                </div>
+                <div class="window-body window-body--trash">
+                    <div class="trash-toolbar">
+                        <div class="trash-info-meta">
+                            <svg class="icon"><use href="#icon-trash"/></svg>
+                            <span id="trash-count-label">6 easter egg items in trash</span>
+                        </div>
+                        <button type="button" class="btn btn-secondary btn-sm" id="empty-trash-btn">Empty Trash</button>
+                    </div>
+                    <div class="trash-file-grid" id="trash-file-grid">
+                        <div class="trash-item-card" data-easteregg="Bugs fixed before deployment (RIP 🪲)">
+                            <span class="trash-item-icon">📄</span>
+                            <span class="trash-item-name">bugs_fixed_v99.js</span>
+                            <span class="trash-item-size">0 KB (Resolved)</span>
+                        </div>
+                        <div class="trash-item-card" data-easteregg="Centered a div on attempt #42 🎯">
+                            <span class="trash-item-icon">🎨</span>
+                            <span class="trash-item-name">center_div_attempt_42.css</span>
+                            <span class="trash-item-size">14.2 KB</span>
+                        </div>
+                        <div class="trash-item-card" data-easteregg="Overthought CSS rules from 3 AM ☕">
+                            <span class="trash-item-icon">☕</span>
+                            <span class="trash-item-name">coffee_cups_count.log</span>
+                            <span class="trash-item-size">1.2 MB</span>
+                        </div>
+                        <div class="trash-item-card" data-easteregg="Legacy table layout from 2018 🦕">
+                            <span class="trash-item-icon">📦</span>
+                            <span class="trash-item-name">old_portfolio_v1.html</span>
+                            <span class="trash-item-size">8.4 KB</span>
+                        </div>
+                        <div class="trash-item-card" data-easteregg="Discarded prompt iterations for Morphix 🤖">
+                            <span class="trash-item-icon">🤖</span>
+                            <span class="trash-item-name">failed_ai_prompts.json</span>
+                            <span class="trash-item-size">42.0 KB</span>
+                        </div>
+                        <div class="trash-item-card" data-easteregg="Unused Node modules backup 📦">
+                            <span class="trash-item-icon">📂</span>
+                            <span class="trash-item-name">node_modules_backup</span>
+                            <span class="trash-item-size">840.5 MB</span>
+                        </div>
+                    </div>
+                    <div class="trash-empty-state" id="trash-empty-state" style="display: none;">
+                        <span class="trash-empty-emoji">🌿</span>
+                        <h3>Trash is Completely Empty</h3>
+                        <p>Your workspace is clean and ready for awesome projects.</p>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
         <!-- Dock -->
-        <nav class="dock" aria-label="App dock">
-            <div class="dock-inner">
-                <button type="button" class="dock-item" data-open="about" data-tooltip="About">
+        <nav class="dock" aria-label="App dock" id="dock">
+            <div class="dock-inner" id="dock-inner">
+                <button type="button" class="dock-item" data-open="about" data-tooltip="About Me">
                     <svg class="icon"><use href="#icon-person"/></svg>
                 </button>
                 <button type="button" class="dock-item" data-open="projects" data-tooltip="Projects">
@@ -531,6 +956,9 @@
                 </button>
                 <button type="button" class="dock-item" data-open="resume" data-tooltip="Resume">
                     <svg class="icon"><use href="#icon-doc"/></svg>
+                </button>
+                <button type="button" class="dock-item" data-open="terminal" data-tooltip="Terminal">
+                    <svg class="icon"><use href="#icon-terminal"/></svg>
                 </button>
                 <span class="dock-divider" aria-hidden="true"></span>
                 <a class="dock-item" href="https://github.com/shreyahalder01" target="_blank" rel="noopener" data-tooltip="GitHub">
