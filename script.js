@@ -1,10 +1,11 @@
-// Portfolio JavaScript
-// Modules: theme, navigation, scroll progress, reveal animations,
-// skills meter, contact form, project card interaction
+// Portfolio JavaScript — "Desktop" edition
+// Modules: theme, clock, window manager (open/close/drag/focus), dock,
+// skills meter, contact form, trash easter egg
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isMobileLayout = () => window.matchMedia('(max-width: 720px)').matches;
 
-// Theme Management
+// Theme Management (day / night)
 class ThemeManager {
     constructor() {
         this.init();
@@ -38,122 +39,66 @@ class ThemeManager {
     }
 }
 
-// Navigation Manager (desktop scroll-spy, navbar elevation, mobile menu)
-class NavigationManager {
+// Wallpaper Picker — lets visitors swap the desktop background
+class WallpaperManager {
     constructor() {
-        this.navbar = document.getElementById('navbar');
-        this.hamburger = document.getElementById('hamburger');
-        this.navLinksList = document.getElementById('nav-links');
-        this.navBackdrop = document.getElementById('nav-backdrop');
+        this.options = {
+            'nebula': "url('./assets/nebula-bg.jpg')",
+            'starry-night': "url('./assets/starry-night.jpg')",
+            'black-hole': "url('./assets/black-hole.jpg')",
+            'earth': "url('./assets/earth.jpg')"
+        };
+        this.defaultWallpaper = 'nebula';
+        this.picker = document.querySelector('[data-wallpaper-picker]');
         this.init();
     }
 
     init() {
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => this.handleNavClick(e));
+        const saved = localStorage.getItem('wallpaper');
+        this.setWallpaper(saved && this.options[saved] ? saved : this.defaultWallpaper, false);
+
+        if (!this.picker) return;
+
+        this.picker.querySelectorAll('[data-wallpaper]').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                this.setWallpaper(swatch.dataset.wallpaper);
+            });
         });
-
-        window.addEventListener('scroll', utils.throttle(() => {
-            this.highlightActiveSection();
-            this.handleNavbarScroll();
-        }, 100));
-
-        if (this.hamburger) {
-            this.hamburger.addEventListener('click', () => this.toggleMobileMenu());
-        }
-        if (this.navBackdrop) {
-            this.navBackdrop.addEventListener('click', () => this.closeMobileMenu());
-        }
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') this.closeMobileMenu();
-        });
-
-        // Run once on load in case the page opens mid-scroll (refresh)
-        this.handleNavbarScroll();
     }
 
-    handleNavClick(e) {
-        e.preventDefault();
-        const targetId = e.target.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+    setWallpaper(key, persist = true) {
+        const value = this.options[key];
+        if (!value) return;
 
-        this.closeMobileMenu();
+        document.documentElement.style.setProperty('--wallpaper-image', value);
+        document.documentElement.setAttribute('data-wallpaper', key);
 
-        if (targetSection) {
-            targetSection.scrollIntoView({
-                behavior: prefersReducedMotion ? 'auto' : 'smooth',
-                block: 'start'
+        if (persist) {
+            localStorage.setItem('wallpaper', key);
+        }
+
+        if (this.picker) {
+            this.picker.querySelectorAll('[data-wallpaper]').forEach(swatch => {
+                swatch.classList.toggle('active', swatch.dataset.wallpaper === key);
             });
         }
     }
-
-    toggleMobileMenu() {
-        const isOpen = this.navLinksList.classList.toggle('open');
-        this.hamburger.classList.toggle('active', isOpen);
-        this.hamburger.setAttribute('aria-expanded', String(isOpen));
-        if (this.navBackdrop) this.navBackdrop.classList.toggle('open', isOpen);
-        document.body.classList.toggle('no-scroll', isOpen);
-    }
-
-    closeMobileMenu() {
-        this.navLinksList.classList.remove('open');
-        this.hamburger.classList.remove('active');
-        this.hamburger.setAttribute('aria-expanded', 'false');
-        if (this.navBackdrop) this.navBackdrop.classList.remove('open');
-        document.body.classList.remove('no-scroll');
-    }
-
-    highlightActiveSection() {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        let currentSection = '';
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-
-            if (window.scrollY >= sectionTop - 200) {
-                currentSection = section.getAttribute('id');
-            }
-        });
-
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    handleNavbarScroll() {
-        if (!this.navbar) return;
-        // Use a class instead of inline styles so light/dark theme colors
-        // (defined in CSS) are respected instead of being overwritten.
-        this.navbar.classList.toggle('scrolled', window.scrollY > 40);
-    }
 }
 
-// Scroll progress bar
-class ScrollProgressManager {
+// Menu bar clock
+class ClockManager {
     constructor() {
-        this.bar = document.getElementById('scroll-progress');
-        if (!this.bar) return;
-        this.init();
-    }
-
-    init() {
-        window.addEventListener('scroll', utils.throttle(() => this.update(), 20));
-        window.addEventListener('resize', utils.throttle(() => this.update(), 100));
+        this.el = document.getElementById('menubar-clock');
+        if (!this.el) return;
         this.update();
+        setInterval(() => this.update(), 15000);
     }
 
     update() {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? scrollTop / docHeight : 0;
-        this.bar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+        const now = new Date();
+        const time = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        const date = now.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+        this.el.textContent = `${date}  ${time}`;
     }
 }
 
@@ -161,30 +106,9 @@ class ScrollProgressManager {
 class SkillsAnimationManager {
     constructor() {
         this.animated = false;
-        this.init();
     }
 
-    init() {
-        const skillsSection = document.querySelector('.skills');
-        if (skillsSection) {
-            const observer = new IntersectionObserver(
-                (entries) => this.handleSkillsIntersection(entries),
-                { threshold: 0.4 }
-            );
-            observer.observe(skillsSection);
-        }
-    }
-
-    handleSkillsIntersection(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !this.animated) {
-                this.animated = true;
-                this.animateSkillBars();
-            }
-        });
-    }
-
-    animateSkillBars() {
+    animate() {
         const skillItems = document.querySelectorAll('.skill-item');
 
         skillItems.forEach(item => {
@@ -193,8 +117,11 @@ class SkillsAnimationManager {
             if (!bar) return;
 
             const target = parseInt(bar.getAttribute('data-progress'), 10) || 0;
-            bar.style.width = target + '%';
-            bar.classList.add('animated');
+            bar.style.width = '0%';
+
+            requestAnimationFrame(() => {
+                bar.style.width = target + '%';
+            });
 
             if (label && !prefersReducedMotion) {
                 this.countUp(label, target);
@@ -205,7 +132,7 @@ class SkillsAnimationManager {
     }
 
     countUp(el, target) {
-        const duration = 1200;
+        const duration = 1000;
         const start = performance.now();
 
         const step = (now) => {
@@ -348,62 +275,457 @@ class ContactFormManager {
     }
 }
 
-// Reveal Observer — staggered fade-up for sections and their children
-class RevealObserver {
+// Toast (used by the Trash icon and other small confirmations)
+class ToastManager {
     constructor() {
-        this.init();
+        this.el = document.getElementById('toast');
+        this.timeout = null;
     }
 
-    init() {
-        const targets = document.querySelectorAll('.reveal');
-
-        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-            targets.forEach(el => el.classList.add('fade-in-up'));
-            return;
-        }
-
-        const observer = new IntersectionObserver(
-            (entries) => this.handleIntersection(entries, observer),
-            { threshold: 0.12, rootMargin: '0px 0px -80px 0px' }
-        );
-
-        targets.forEach(el => observer.observe(el));
-    }
-
-    handleIntersection(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-up');
-                observer.unobserve(entry.target);
-            }
-        });
+    show(message, duration = 2400) {
+        if (!this.el) return;
+        this.el.textContent = message;
+        this.el.classList.add('visible');
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            this.el.classList.remove('visible');
+        }, duration);
     }
 }
 
-// Project card tilt — subtle, disabled for reduced motion / touch
-class ProjectCardTilt {
-    constructor() {
-        if (prefersReducedMotion || window.matchMedia('(pointer: coarse)').matches) return;
-        this.cards = document.querySelectorAll('.project-card');
+// Window Manager — open/close/focus/drag for the finder-style windows
+class WindowManager {
+    constructor({ onOpen } = {}) {
+        this.windows = new Map();
+        this.zIndex = 50;
+        this.topId = null;
+        this.onOpen = onOpen || (() => {});
+        this.iconOpenAudio = null;
+
+        document.querySelectorAll('.window').forEach(el => {
+            const id = el.dataset.window;
+            this.windows.set(id, el);
+            this.bindWindow(el, id);
+        });
+
+        document.querySelectorAll('[data-open]').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const isIconTrigger = trigger.classList.contains('desktop-icon') || trigger.classList.contains('dock-item');
+                if (isIconTrigger) {
+                    this.playIconOpenSound();
+                }
+                this.open(trigger.dataset.open);
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.topId) {
+                this.close(this.topId);
+            }
+        });
+    }
+
+    bindWindow(el, id) {
+        el.addEventListener('pointerdown', () => this.focus(id));
+
+        const closeBtn = el.querySelector('[data-close]');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.close(id);
+            });
+        }
+
+        const handle = el.querySelector('[data-drag-handle]');
+        if (handle) {
+            this.bindDrag(el, handle);
+        }
+    }
+
+    bindDrag(el, handle) {
+        let dragging = false;
+        let startX = 0;
+        let startY = 0;
+        let origLeft = 0;
+        let origTop = 0;
+
+        const onPointerDown = (e) => {
+            if (isMobileLayout()) return;
+            if (e.target.closest('.tl')) return;
+
+            const desktop = document.getElementById('desktop');
+            const desktopRect = desktop.getBoundingClientRect();
+            const rect = el.getBoundingClientRect();
+
+            el.style.left = `${rect.left - desktopRect.left}px`;
+            el.style.top = `${rect.top - desktopRect.top}px`;
+            el.style.transform = 'none';
+
+            origLeft = rect.left - desktopRect.left;
+            origTop = rect.top - desktopRect.top;
+            startX = e.clientX;
+            startY = e.clientY;
+            dragging = true;
+
+            el.classList.add('dragging');
+            handle.setPointerCapture(e.pointerId);
+        };
+
+        const onPointerMove = (e) => {
+            if (!dragging) return;
+            const desktop = document.getElementById('desktop');
+            const desktopRect = desktop.getBoundingClientRect();
+
+            const dx = e.clientX - startX;
+            const dy = e.clientY - startY;
+
+            let newLeft = origLeft + dx;
+            let newTop = origTop + dy;
+
+            newLeft = Math.min(Math.max(newLeft, -el.offsetWidth + 140), desktopRect.width - 140);
+            newTop = Math.min(Math.max(newTop, 0), desktopRect.height - 44);
+
+            el.style.left = `${newLeft}px`;
+            el.style.top = `${newTop}px`;
+        };
+
+        const onPointerUp = (e) => {
+            if (!dragging) return;
+            dragging = false;
+            el.classList.remove('dragging');
+            try { handle.releasePointerCapture(e.pointerId); } catch (err) { /* noop */ }
+        };
+
+        handle.addEventListener('pointerdown', onPointerDown);
+        handle.addEventListener('pointermove', onPointerMove);
+        handle.addEventListener('pointerup', onPointerUp);
+        handle.addEventListener('pointercancel', onPointerUp);
+    }
+
+    playIconOpenSound() {
+        if (prefersReducedMotion) return;
+        try {
+            if (!this.iconOpenAudio) {
+                this.iconOpenAudio = new Audio('assets/iconopen.mp3');
+                this.iconOpenAudio.volume = 0.5;
+            }
+            this.iconOpenAudio.currentTime = 0;
+            const playPromise = this.iconOpenAudio.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => { /* Autoplay may be blocked; ignore */ });
+            }
+        } catch (err) {
+            /* Audio is best-effort; silently ignore any playback errors */
+        }
+    }
+
+    open(id) {
+        const el = this.windows.get(id);
+        if (!el) return;
+
+        el.classList.remove('minimized');
+        el.classList.add('open');
+        el.setAttribute('aria-hidden', 'false');
+
+        requestAnimationFrame(() => {
+            el.classList.add('visible');
+        });
+
+        this.focus(id);
+        this.onOpen(id);
+    }
+
+    close(id) {
+        const el = this.windows.get(id);
+        if (!el) return;
+
+        el.classList.remove('visible');
+        el.setAttribute('aria-hidden', 'true');
+
+        const finish = () => el.classList.remove('open');
+        if (prefersReducedMotion) {
+            finish();
+        } else {
+            setTimeout(finish, 220);
+        }
+
+        if (this.topId === id) {
+            this.topId = null;
+        }
+        this.updateActiveNav();
+    }
+
+    focus(id) {
+        const el = this.windows.get(id);
+        if (!el || !el.classList.contains('open')) return;
+
+        this.zIndex += 1;
+        el.style.zIndex = this.zIndex;
+        this.topId = id;
+        this.updateActiveNav();
+    }
+
+    updateActiveNav() {
+        document.querySelectorAll('.menubar-link').forEach(link => {
+            link.classList.toggle('active', link.dataset.open === this.topId);
+        });
+    }
+
+    getOpenIds() {
+        return Array.from(this.windows.entries())
+            .filter(([, el]) => el.classList.contains('open'))
+            .map(([id]) => id);
+    }
+
+    closeAllWindows() {
+        this.getOpenIds().forEach(id => this.close(id));
+    }
+
+    minimizeAll() {
+        this.getOpenIds().forEach(id => {
+            const el = this.windows.get(id);
+            if (!el) return;
+            el.classList.remove('visible');
+            el.classList.add('minimized');
+        });
+        this.topId = null;
+        this.updateActiveNav();
+    }
+
+    bringAllToFront() {
+        const openIds = this.getOpenIds();
+        openIds.forEach(id => {
+            const el = this.windows.get(id);
+            if (!el) return;
+            el.classList.remove('minimized');
+            el.classList.add('visible');
+            this.zIndex += 1;
+            el.style.zIndex = this.zIndex;
+        });
+        if (openIds.length) {
+            this.topId = openIds[openIds.length - 1];
+        }
+        this.updateActiveNav();
+    }
+}
+
+// Lock screen — greets visitors with a live clock before revealing the desktop
+class LockScreen {
+    constructor(onUnlock) {
+        this.el = document.getElementById('lockscreen');
+        this.dateEl = document.getElementById('lock-date');
+        this.clockEl = document.getElementById('lock-clock');
+        this.unlockBtn = document.getElementById('lock-unlock-btn');
+        this.onUnlock = onUnlock || (() => {});
+        this.unlocked = false;
+
+        if (!this.el) {
+            this.onUnlock();
+            return;
+        }
+
         this.init();
     }
 
     init() {
-        this.cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => this.handleMove(e, card));
-            card.addEventListener('mouseleave', () => this.reset(card));
+        this.updateTime();
+        this.timer = setInterval(() => this.updateTime(), 1000);
+
+        this.el.addEventListener('click', () => this.unlock());
+        this.unlockBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.unlock();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (!this.unlocked && (e.key === 'Enter' || e.key === ' ')) {
+                e.preventDefault();
+                this.unlock();
+            }
         });
     }
 
-    handleMove(e, card) {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(800px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 4).toFixed(2)}deg) translateY(-4px)`;
+    updateTime() {
+        const now = new Date();
+        if (this.clockEl) {
+            this.clockEl.textContent = now.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+        }
+        if (this.dateEl) {
+            this.dateEl.textContent = now.toLocaleDateString([], {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
     }
 
-    reset(card) {
-        card.style.transform = '';
+    playUnlockSound() {
+        try {
+            if (!this.unlockAudio) {
+                this.unlockAudio = new Audio('assets/unlock.mp3');
+                this.unlockAudio.volume = 0.6;
+            }
+            this.unlockAudio.currentTime = 0;
+            const playPromise = this.unlockAudio.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => { /* Autoplay may be blocked; ignore */ });
+            }
+        } catch (err) {
+            /* Audio is best-effort; silently ignore any playback errors */
+        }
+    }
+
+    unlock() {
+        if (this.unlocked) return;
+        this.unlocked = true;
+        clearInterval(this.timer);
+
+        if (!prefersReducedMotion) {
+            this.playUnlockSound();
+        }
+
+        this.el.classList.add('unlocking');
+        this.el.setAttribute('aria-hidden', 'true');
+
+        const finish = () => { this.el.style.display = 'none'; };
+        if (prefersReducedMotion) {
+            finish();
+        } else {
+            setTimeout(finish, 650);
+        }
+
+        this.onUnlock();
+    }
+}
+
+// Welcome modal — greets first-time visitors each session
+class WelcomeModal {
+    constructor() {
+        this.overlay = document.getElementById('welcome-overlay');
+        this.closeBtn = document.getElementById('welcome-close');
+        if (!this.overlay) return;
+
+        this.init();
+    }
+
+    init() {
+        this.closeBtn?.addEventListener('click', () => this.close());
+        this.overlay.addEventListener('click', (e) => {
+            if (e.target === this.overlay) this.close();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.overlay.classList.contains('visible')) {
+                this.close();
+            }
+        });
+    }
+
+    maybeOpen() {
+        const alreadySeen = sessionStorage.getItem('welcomeSeen');
+        if (!alreadySeen) {
+            this.open();
+        }
+    }
+
+    open() {
+        this.overlay.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => this.overlay.classList.add('visible'));
+        this.closeBtn?.focus();
+        sessionStorage.setItem('welcomeSeen', '1');
+    }
+
+    close() {
+        this.overlay.classList.remove('visible');
+        this.overlay.setAttribute('aria-hidden', 'true');
+    }
+}
+
+// Trash icon — small easter egg, no destructive behavior
+class TrashManager {
+    constructor(toast) {
+        this.toast = toast;
+        this.icon = document.getElementById('trash-icon');
+        if (this.icon) {
+            this.icon.addEventListener('click', () => this.empty());
+        }
+    }
+
+    empty() {
+        this.toast.show('Nothing in here — just an empty trash can 🌿');
+    }
+}
+
+// Window Menu — the "Window" dropdown in the menu bar (Close/Minimize/Bring to Front)
+class WindowMenuManager {
+    constructor(windowManager) {
+        this.windowManager = windowManager;
+        this.menu = document.querySelector('[data-menu]');
+        if (!this.menu) return;
+
+        this.trigger = this.menu.querySelector('[data-menu-trigger]');
+        this.dropdown = this.menu.querySelector('.menubar-menu-dropdown');
+        this.open = false;
+
+        this.init();
+    }
+
+    init() {
+        this.trigger?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggle();
+        });
+
+        this.dropdown?.querySelectorAll('[data-window-action]').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.runAction(item.dataset.windowAction);
+                this.close();
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (this.open && !this.menu.contains(e.target)) {
+                this.close();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.open) {
+                this.close();
+            }
+        });
+    }
+
+    runAction(action) {
+        if (!this.windowManager) return;
+        if (action === 'close-all') {
+            this.windowManager.closeAllWindows();
+        } else if (action === 'minimize-all') {
+            this.windowManager.minimizeAll();
+        } else if (action === 'front-all') {
+            this.windowManager.bringAllToFront();
+        }
+    }
+
+    toggle() {
+        this.open ? this.close() : this.openMenu();
+    }
+
+    openMenu() {
+        this.open = true;
+        this.dropdown?.classList.add('visible');
+        this.dropdown?.setAttribute('aria-hidden', 'false');
+        this.trigger?.setAttribute('aria-expanded', 'true');
+    }
+
+    close() {
+        this.open = false;
+        this.dropdown?.classList.remove('visible');
+        this.dropdown?.setAttribute('aria-hidden', 'true');
+        this.trigger?.setAttribute('aria-expanded', 'false');
     }
 }
 
@@ -423,17 +745,29 @@ class PortfolioApp {
 
     initializeApp() {
         this.themeManager = new ThemeManager();
-        this.navigationManager = new NavigationManager();
-        this.scrollProgressManager = new ScrollProgressManager();
+        this.wallpaperManager = new WallpaperManager();
+        this.clockManager = new ClockManager();
         this.skillsAnimationManager = new SkillsAnimationManager();
         this.contactFormManager = new ContactFormManager();
-        this.revealObserver = new RevealObserver();
-        this.projectCardTilt = new ProjectCardTilt();
+        this.toastManager = new ToastManager();
+        this.trashManager = new TrashManager(this.toastManager);
+        this.welcomeModal = new WelcomeModal();
+        this.lockScreen = new LockScreen(() => {
+            setTimeout(() => this.welcomeModal.maybeOpen(), prefersReducedMotion ? 150 : 550);
+        });
+
+        this.windowManager = new WindowManager({
+            onOpen: (id) => {
+                if (id === 'skills') {
+                    this.skillsAnimationManager.animate();
+                }
+            }
+        });
+
+        this.windowMenuManager = new WindowMenuManager(this.windowManager);
 
         document.body.classList.remove('loading');
-
         this.setFooterYear();
-        this.initializeSubtitleReveal();
     }
 
     setFooterYear() {
@@ -442,69 +776,7 @@ class PortfolioApp {
             yearEl.textContent = new Date().getFullYear();
         }
     }
-
-    initializeSubtitleReveal() {
-        const subtitle = document.querySelector('.hero-subtitle');
-        if (!subtitle) return;
-
-        if (prefersReducedMotion) {
-            return;
-        }
-
-        const text = subtitle.textContent;
-        subtitle.setAttribute('aria-label', text);
-        subtitle.textContent = '';
-
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                subtitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 45);
-            }
-        };
-
-        setTimeout(typeWriter, 500);
-    }
 }
-
-// Utility functions
-const utils = {
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    },
-
-    throttle(func, limit) {
-        let inThrottle;
-        return function () {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    },
-
-    isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-};
 
 // Initialize the application
 const app = new PortfolioApp();
@@ -512,12 +784,14 @@ const app = new PortfolioApp();
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         ThemeManager,
-        NavigationManager,
-        ScrollProgressManager,
+        WallpaperManager,
+        ClockManager,
         SkillsAnimationManager,
         ContactFormManager,
-        RevealObserver,
-        ProjectCardTilt,
+        ToastManager,
+        WindowManager,
+        WindowMenuManager,
+        TrashManager,
         PortfolioApp
     };
 }
