@@ -1,0 +1,21 @@
+{
+  "name": "Shreya Halder — Portfolio",
+  "short_name": "Shreya Portfolio",
+  "description": "Portfolio of Shreya Halder, AI/ML Engineer & Full-Stack Developer",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f0d1b",
+  "theme_color": "#8b7cf6",
+  "icons": [
+    {
+      "src": "./assets/mainlogo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/mainlogo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
