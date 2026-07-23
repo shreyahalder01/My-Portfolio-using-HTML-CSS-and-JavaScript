@@ -4,409 +4,550 @@
     <meta charset="UTF-8">
     <link rel="icon" href="./assets/mainlogo.png" type="image/icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shreya Halder - Portfolio</title>
+    <title>Shreya Halder — Portfolio</title>
     <meta name="description" content="Shreya Halder - MCA Student & Web Developer specializing in AI evaluation, data quality assurance, and structured data workflows">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mediaqueries.css">
 </head>
 <body class="loading">
 
-    <!-- Scroll progress -->
-    <div class="scroll-progress" id="scroll-progress"></div>
+    <!-- Icon sprite (hidden) -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true">
+        <defs>
+            <symbol id="icon-folder" viewBox="0 0 48 40">
+                <path d="M4 8c0-2.2 1.8-4 4-4h9.5c1.1 0 2.1.5 2.8 1.3L23 9h17c2.2 0 4 1.8 4 4v21c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V8z" fill="currentColor"/>
+                <path d="M4 14h40v19c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V14z" fill="currentColor" opacity="0.001"/>
+                <path d="M4 15c0-1.1.9-2 2-2h36c1.1 0 2 .9 2 2v18c0 2.2-1.8 4-4 4H8c-2.2 0-4-1.8-4-4V15z" class="folder-flap"/>
+            </symbol>
+            <symbol id="icon-file" viewBox="0 0 40 48">
+                <path d="M8 2h17l11 11v31a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="currentColor"/>
+                <path d="M25 2v9a2 2 0 0 0 2 2h9L25 2z" class="file-fold"/>
+                <rect x="11" y="22" width="18" height="2.4" rx="1.2" class="file-line"/>
+                <rect x="11" y="28" width="18" height="2.4" rx="1.2" class="file-line"/>
+                <rect x="11" y="34" width="11" height="2.4" rx="1.2" class="file-line"/>
+            </symbol>
+            <symbol id="icon-trash" viewBox="0 0 40 48">
+                <path d="M6 12h28l-2.4 30.2A4 4 0 0 1 27.6 46H12.4a4 4 0 0 1-4-3.8L6 12z" fill="currentColor"/>
+                <path d="M4 8h32v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8z" fill="currentColor"/>
+                <path d="M15 4h10a2 2 0 0 1 2 2v2H13V6a2 2 0 0 1 2-2z" fill="currentColor"/>
+                <rect x="14" y="18" width="2.6" height="20" rx="1.3" class="trash-line"/>
+                <rect x="18.7" y="18" width="2.6" height="20" rx="1.3" class="trash-line"/>
+                <rect x="23.4" y="18" width="2.6" height="20" rx="1.3" class="trash-line"/>
+            </symbol>
+            <symbol id="icon-person" viewBox="0 0 40 40">
+                <circle cx="20" cy="14" r="8" fill="currentColor"/>
+                <path d="M4 36c0-8.8 7.2-14 16-14s16 5.2 16 14v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1z" fill="currentColor"/>
+            </symbol>
+            <symbol id="icon-clock" viewBox="0 0 40 40">
+                <circle cx="20" cy="20" r="17" fill="none" stroke="currentColor" stroke-width="3"/>
+                <path d="M20 10v11l7.5 4.3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            <symbol id="icon-doc" viewBox="0 0 40 48">
+                <path d="M8 2h17l11 11v31a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="2.6"/>
+                <path d="M25 2v9a2 2 0 0 0 2 2h9" fill="none" stroke="currentColor" stroke-width="2.6"/>
+                <rect x="11" y="24" width="18" height="2.4" rx="1.2" fill="currentColor"/>
+                <rect x="11" y="30" width="18" height="2.4" rx="1.2" fill="currentColor"/>
+                <rect x="11" y="36" width="10" height="2.4" rx="1.2" fill="currentColor"/>
+            </symbol>
+            <symbol id="icon-github" viewBox="0 0 40 40">
+                <path fill="currentColor" d="M20 2C10 2 2 10 2 20.3c0 8.2 5.3 15.2 12.7 17.6.9.2 1.3-.4 1.3-.9v-3.4c-5.2 1.1-6.3-2.5-6.3-2.5-.8-2.2-2.1-2.8-2.1-2.8-1.7-1.2.1-1.1.1-1.1 1.9.1 2.9 2 2.9 2 1.7 3 4.5 2.1 5.6 1.6.2-1.3.7-2.1 1.2-2.6-4.2-.5-8.6-2.1-8.6-9.4 0-2.1.7-3.8 2-5.1-.2-.5-.9-2.5.2-5.1 0 0 1.6-.5 5.2 2a17.7 17.7 0 0 1 9.4 0c3.6-2.5 5.2-2 5.2-2 1 2.6.4 4.6.2 5.1 1.2 1.3 2 3 2 5.1 0 7.3-4.4 8.9-8.6 9.4.7.6 1.3 1.8 1.3 3.6v5.3c0 .5.4 1.1 1.3.9C32.7 35.5 38 28.5 38 20.3 38 10 30 2 20 2z"/>
+            </symbol>
+            <symbol id="icon-linkedin" viewBox="0 0 40 40">
+                <rect x="3" y="3" width="34" height="34" rx="8" fill="currentColor"/>
+                <rect x="10.5" y="16" width="4.4" height="16" fill="var(--dock-bg,#fff)"/>
+                <circle cx="12.7" cy="10" r="2.6" fill="var(--dock-bg,#fff)"/>
+                <path d="M19.5 16h4.2v2.2h.06c.6-1.1 2-2.2 4.1-2.2 4.4 0 5.2 2.7 5.2 6.3V32h-4.4v-8.9c0-2.1 0-4.9-3-4.9-3 0-3.5 2.3-3.5 4.7V32h-4.4V16z" fill="var(--dock-bg,#fff)"/>
+            </symbol>
+            <symbol id="icon-mail" viewBox="0 0 40 32">
+                <rect x="2" y="4" width="36" height="24" rx="4" fill="none" stroke="currentColor" stroke-width="2.8"/>
+                <path d="M4 7l16 12L36 7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </symbol>
+            <symbol id="icon-sun" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5" fill="currentColor"/>
+                <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M12 1.5v3M12 19.5v3M22.5 12h-3M4.5 12h-3M19.1 4.9l-2.1 2.1M7 17l-2.1 2.1M19.1 19.1L17 17M7 7 4.9 4.9"/>
+                </g>
+            </symbol>
+            <symbol id="icon-moon" viewBox="0 0 24 24">
+                <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 1 0 10.5 10.5z" fill="currentColor"/>
+            </symbol>
+            <symbol id="icon-lock" viewBox="0 0 24 24">
+                <rect x="4.5" y="10.5" width="15" height="10.5" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M7.5 10.5V7.8a4.5 4.5 0 0 1 9 0v2.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <circle cx="12" cy="15.2" r="1.5" fill="currentColor"/>
+                <path d="M12 16.7v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </symbol>
+        </defs>
+    </svg>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container navbar-inner">
-            <a href="#home" class="logo">Shreya<span>.</span></a>
-
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                 <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <span class="sun">☀️</span>
-                    <span class="moon">🌙</span>
+    <!-- Lock screen -->
+    <div class="lockscreen" id="lockscreen" role="dialog" aria-modal="true" aria-label="Locked screen">
+        <div class="lockscreen-bg" aria-hidden="true"></div>
+        <div class="lockscreen-content">
+            <div class="lock-time">
+                <time class="lock-date" id="lock-date">—</time>
+                <time class="lock-clock" id="lock-clock">--:--</time>
+            </div>
+            <div class="lock-identity">
+                <div class="lock-avatar" aria-hidden="true">SH</div>
+                <h2 class="lock-name">Shreya Halder</h2>
+                <p class="lock-role">Web Developer</p>
+                <button type="button" class="lock-unlock-btn" id="lock-unlock-btn">
+                    <svg class="icon"><use href="#icon-lock"/></svg>
+                    <span>Click to unlock</span>
                 </button>
-                <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
-                    <span></span><span></span><span></span>
+                <p class="lock-hint">Click anywhere to unlock</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome modal -->
+    <div class="welcome-overlay" id="welcome-overlay" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-hidden="true">
+        <div class="welcome-modal">
+            <span class="welcome-glow" aria-hidden="true"></span>
+            <p class="welcome-eyebrow">✨ Booting up</p>
+            <h2 class="welcome-title" id="welcome-title">Welcome to Shreya's desktop.</h2>
+            <p class="welcome-text">Take a look around — every icon opens something worth exploring.</p>
+            <button type="button" class="btn btn-primary" id="welcome-close">Let's go</button>
+        </div>
+    </div>
+
+    <div class="desktop" id="desktop">
+
+        <!-- Wallpaper -->
+        <div class="wallpaper" aria-hidden="true">
+            <span class="blob blob-1"></span>
+            <span class="blob blob-2"></span>
+            <span class="blob blob-3"></span>
+            <span class="blob blob-4"></span>
+            <span class="grain"></span>
+        </div>
+
+        <!-- Menu bar -->
+        <header class="menubar">
+            <div class="menubar-left">
+                <span class="menubar-brand">Shreya<span class="dot">.</span></span>
+                <nav class="menubar-nav" aria-label="Quick navigation">
+                    <div class="menubar-menu" data-menu>
+                        <button type="button" class="menubar-link menubar-menu-trigger" data-menu-trigger aria-haspopup="true" aria-expanded="false">Window</button>
+                        <div class="menubar-menu-dropdown" role="menu" aria-hidden="true">
+                            <button type="button" class="menubar-menu-item" role="menuitem" data-window-action="close-all">Close All Windows</button>
+                            <button type="button" class="menubar-menu-item" role="menuitem" data-window-action="minimize-all">Minimize All</button>
+                            <button type="button" class="menubar-menu-item" role="menuitem" data-window-action="front-all">Bring All to Front</button>
+                        </div>
+                    </div>
+                    <button type="button" class="menubar-link" data-open="contact">Contact</button>
+                </nav>
+            </div>
+            <div class="menubar-right">
+                <div class="wallpaper-picker" data-wallpaper-picker>
+                    <span class="wallpaper-picker-label">Wallpaper</span>
+                    <div class="wallpaper-swatches">
+                        <button type="button" class="wallpaper-swatch wallpaper-swatch--default" data-wallpaper="nebula" aria-label="Nebula wallpaper" title="Nebula"></button>
+                        <button type="button" class="wallpaper-swatch wallpaper-swatch--starry-night" data-wallpaper="starry-night" aria-label="Starry Night wallpaper" title="Starry Night"></button>
+                        <button type="button" class="wallpaper-swatch wallpaper-swatch--black-hole" data-wallpaper="black-hole" aria-label="Black Hole wallpaper" title="Black Hole"></button>
+                        <button type="button" class="wallpaper-swatch wallpaper-swatch--earth" data-wallpaper="earth" aria-label="Earth wallpaper" title="Earth"></button>
+                    </div>
+                </div>
+                <span class="status-pill"><span class="status-dot"></span>Open to opportunities</span>
+                <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle night mode">
+                    <svg class="icon sun"><use href="#icon-sun"/></svg>
+                    <svg class="icon moon"><use href="#icon-moon"/></svg>
+                </button>
+                <time class="menubar-clock" id="menubar-clock">--:--</time>
+            </div>
+        </header>
+
+        <!-- Desktop icons -->
+        <div class="desktop-icons">
+            <button type="button" class="desktop-icon" data-open="about">
+                <span class="icon-visual icon-folder"><svg class="icon"><use href="#icon-folder"/></svg></span>
+                <span class="icon-label">About Me</span>
+            </button>
+            <button type="button" class="desktop-icon" data-open="projects">
+                <span class="icon-visual icon-folder"><svg class="icon"><use href="#icon-folder"/></svg></span>
+                <span class="icon-label">Projects</span>
+            </button>
+            <button type="button" class="desktop-icon" data-open="skills">
+                <span class="icon-visual icon-folder"><svg class="icon"><use href="#icon-folder"/></svg></span>
+                <span class="icon-label">Skills</span>
+            </button>
+            <button type="button" class="desktop-icon" data-open="resume">
+                <span class="icon-visual icon-file"><svg class="icon"><use href="#icon-file"/></svg></span>
+                <span class="icon-label">Resume.pdf</span>
+            </button>
+            <button type="button" class="desktop-icon" id="trash-icon">
+                <span class="icon-visual icon-trash"><svg class="icon"><use href="#icon-trash"/></svg></span>
+                <span class="icon-label">Trash</span>
+            </button>
+        </div>
+
+        <!-- Windows -->
+        <div class="windows-layer" id="windows-layer">
+
+            <!-- About window -->
+            <section class="window" data-window="about" role="dialog" aria-label="About Me" aria-hidden="true">
+                <div class="window-titlebar" data-drag-handle>
+                    <div class="traffic-lights">
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
+                        <span class="tl tl-min" aria-hidden="true"></span>
+                        <span class="tl tl-max" aria-hidden="true"></span>
+                    </div>
+                    <span class="window-title">About Me</span>
+                </div>
+                <div class="window-body">
+                    <p class="window-eyebrow">Hi, I'm</p>
+                    <h2 class="window-heading">Shreya Halder</h2>
+                    <p class="window-subtitle">MCA Student &amp; Web Developer</p>
+                    <div class="about-columns">
+                        <div class="about-text">
+                            <p>Hi, I'm Shreya — a developer based in Lucknow, India, with a BCA (9.01 CGPA) and currently pursuing my MCA. I work at the intersection of AI evaluation, data quality, and full-stack development, from validating API outputs and refining AI prompts to building projects like Morphix, a mixed-media video studio with a pluggable AI pipeline, and Cyanotype, a browser-based photo-to-sun-print tool. I care about getting the details right — clean data, consistent outputs, and AI systems you can actually trust.</p>
+                            <dl class="spec-sheet">
+                                <div class="spec-row">
+                                    <dt>Education</dt>
+                                    <dd>MCA (Master's Degree)</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>Experience</dt>
+                                    <dd>Fresher</dd>
+                                </div>
+                                <div class="spec-row">
+                                    <dt>Graduating</dt>
+                                    <dd>2028</dd>
+                                </div>
+                            </dl>
+                            <div class="about-actions">
+                                <button type="button" class="btn btn-primary" data-open="contact">Get In Touch</button>
+                                <a href="./assets/Shreya_Halder_Resume.pdf" class="btn btn-secondary" download>Download CV</a>
+                            </div>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/shreya-halder" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+                                <a href="https://github.com/shreyahalder01" target="_blank" rel="noopener" class="social-link">GitHub</a>
+                            </div>
+                        </div>
+                        <div class="about-image">
+                            <div class="polaroid">
+                                <img src="./assets/about-pic.jpg" alt="Shreya Halder" class="about-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects window -->
+            <section class="window window--wide" data-window="projects" role="dialog" aria-label="Projects" aria-hidden="true">
+                <div class="window-titlebar" data-drag-handle>
+                    <div class="traffic-lights">
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
+                        <span class="tl tl-min" aria-hidden="true"></span>
+                        <span class="tl tl-max" aria-hidden="true"></span>
+                    </div>
+                    <span class="window-title">Projects</span>
+                </div>
+                <div class="window-body">
+                    <p class="window-eyebrow">Selected work</p>
+                    <h2 class="window-heading">My Projects</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-image">
+                                <span class="project-status">Repository</span>
+                                <img src="./assets/morphix.png" alt="Morphix">
+                            </div>
+                            <div class="project-content">
+                                <h3>Morphix</h3>
+                                <p>A Next.js-based mixed-media studio for uploading source video, choosing styles, and generating AI-assisted visual outputs.</p>
+                                <div class="project-tech">
+                                    <span class="tech-label">stack:</span>
+                                    <span class="tech-tag">Next.js</span>
+                                    <span class="tech-tag">TypeScript</span>
+                                    <span class="tech-tag">Python</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/shreyahalder01/Morphix" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image">
+                                <span class="project-status">Live</span>
+                                <img src="./assets/cyanotype.png" alt="Cyanotype">
+                            </div>
+                            <div class="project-content">
+                                <h3>Cyanotype</h3>
+                                <p>A client-side image-processing tool that transforms photographs into cyanotype-style sun-prints, with adjustable exposure, toning, and paper-edge controls, plus real-time preview rendering.</p>
+                                <div class="project-tech">
+                                    <span class="tech-label">stack:</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/shreyahalder01/cyanotype" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+                                    <a href="https://shreyahalder01.github.io/cyanotype/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image">
+                                <span class="project-status">Live</span>
+                                <img src="./assets/aerophone.png" alt="Aerophone">
+                            </div>
+                            <div class="project-content">
+                                <h3>Aerophone</h3>
+                                <p>A modern project showcasing interactive web experiences and polished UI design with a focus on creative digital products.</p>
+                                <div class="project-tech">
+                                    <span class="tech-label">stack:</span>
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/shreyahalder01/Aerophone" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+                                    <a href="https://shreyahalder01.github.io/Aerophone/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image">
+                                <span class="project-status">Live</span>
+                                <img src="./assets/project-1.png" alt="Weather App">
+                            </div>
+                            <div class="project-content">
+                                <h3>Weather App</h3>
+                                <p>A responsive weather application built with HTML, CSS, and JavaScript that provides real-time weather information for any city.</p>
+                                <div class="project-tech">
+                                    <span class="tech-label">stack:</span>
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/shreyahalder01/Weather-App" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+                                    <a href="https://shreyahalder01.github.io/Weather-App/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image">
+                                <span class="project-status">Live</span>
+                                <img src="./assets/project-2.png" alt="Instagram Clone">
+                            </div>
+                            <div class="project-content">
+                                <h3>Instagram Clone</h3>
+                                <p>A pixel-perfect clone of Instagram's user interface created using HTML and CSS, showcasing advanced styling techniques.</p>
+                                <div class="project-tech">
+                                    <span class="tech-label">stack:</span>
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">Flexbox</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/shreyahalder01/Instagram-clone-using-HTML-and-CSS" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+                                    <a href="https://shreyahalder01.github.io/Instagram-clone-using-HTML-and-CSS/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-image">
+                                <span class="project-status">Live</span>
+                                <img src="./assets/project-3.png" alt="Snake Game">
+                            </div>
+                            <div class="project-content">
+                                <h3>Snake Game</h3>
+                                <p>A classic Snake game implemented in JavaScript with smooth controls and score tracking functionality.</p>
+                                <div class="project-tech">
+                                    <span class="tech-label">stack:</span>
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="https://github.com/shreyahalder01/snake-game" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
+                                    <a href="https://shreyahalder01.github.io/snake-game/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills window -->
+            <section class="window" data-window="skills" role="dialog" aria-label="Skills" aria-hidden="true">
+                <div class="window-titlebar" data-drag-handle>
+                    <div class="traffic-lights">
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
+                        <span class="tl tl-min" aria-hidden="true"></span>
+                        <span class="tl tl-max" aria-hidden="true"></span>
+                    </div>
+                    <span class="window-title">Skills</span>
+                </div>
+                <div class="window-body">
+                    <p class="window-eyebrow">Capabilities</p>
+                    <h2 class="window-heading">My Skills</h2>
+                    <div class="skills-content">
+                        <div class="skills-category">
+                            <h3>Technical Skills</h3>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Python</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="30"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">HTML</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="70"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">CSS</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="65"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">JavaScript</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="55"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Java</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="50"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">C Programming</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="60"></div></div>
+                            </div>
+                        </div>
+                        <div class="skills-category">
+                            <h3>Soft Skills</h3>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Communication</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="100"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Creative Writing</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="80"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Problem Solving</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="90"></div></div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-info"><span class="skill-name">Team Collaboration</span><span class="skill-percentage">0%</span></div>
+                                <div class="skill-bar"><div class="skill-progress" data-progress="100"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resume window -->
+            <section class="window" data-window="resume" role="dialog" aria-label="Resume" aria-hidden="true">
+                <div class="window-titlebar" data-drag-handle>
+                    <div class="traffic-lights">
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
+                        <span class="tl tl-min" aria-hidden="true"></span>
+                        <span class="tl tl-max" aria-hidden="true"></span>
+                    </div>
+                    <span class="window-title">Resume.pdf</span>
+                </div>
+                <div class="window-body window-body--resume">
+                    <p class="window-eyebrow">Preview</p>
+                    <h2 class="window-heading">Resume</h2>
+                    <div class="resume-frame">
+                        <iframe src="./assets/Shreya_Halder_Resume.pdf" title="Shreya Halder's Resume" loading="lazy"></iframe>
+                    </div>
+                    <div class="about-actions">
+                        <a href="./assets/Shreya_Halder_Resume.pdf" class="btn btn-primary" download>Download PDF</a>
+                        <a href="./assets/Shreya_Halder_Resume.pdf" target="_blank" rel="noopener" class="btn btn-secondary">Open in New Tab</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact window -->
+            <section class="window" data-window="contact" role="dialog" aria-label="Contact" aria-hidden="true">
+                <div class="window-titlebar" data-drag-handle>
+                    <div class="traffic-lights">
+                        <button type="button" class="tl tl-close" data-close aria-label="Close window"></button>
+                        <span class="tl tl-min" aria-hidden="true"></span>
+                        <span class="tl tl-max" aria-hidden="true"></span>
+                    </div>
+                    <span class="window-title">Mail — New Message</span>
+                </div>
+                <div class="window-body">
+                    <p class="window-eyebrow">Say hello</p>
+                    <h2 class="window-heading">Get In Touch</h2>
+                    <div class="contact-content">
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <strong>Email</strong>
+                                <a href="mailto:shreyahalder013@gmail.com">shreyahalder013@gmail.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <strong>LinkedIn</strong>
+                                <a href="https://www.linkedin.com/in/shreya-halder/" target="_blank" rel="noopener">linkedin.com/in/shreya-halder</a>
+                            </div>
+                            <div class="contact-item">
+                                <strong>GitHub</strong>
+                                <a href="https://github.com/shreyahalder01" target="_blank" rel="noopener">github.com/shreyahalder01</a>
+                            </div>
+                        </div>
+                        <div class="contact-form">
+                            <form id="contactForm" novalidate>
+                                <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+                                <div class="form-group">
+                                    <input type="text" id="name" name="name" placeholder=" " required>
+                                    <label for="name">Your Name</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" placeholder=" " required>
+                                    <label for="email">Your Email</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="subject" name="subject" placeholder=" " required>
+                                    <label for="subject">Subject</label>
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+                                    <label for="message">Your Message</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Dock -->
+        <nav class="dock" aria-label="App dock">
+            <div class="dock-inner">
+                <button type="button" class="dock-item" data-open="about" data-tooltip="About">
+                    <svg class="icon"><use href="#icon-person"/></svg>
+                </button>
+                <button type="button" class="dock-item" data-open="projects" data-tooltip="Projects">
+                    <svg class="icon"><use href="#icon-folder"/></svg>
+                </button>
+                <button type="button" class="dock-item" data-open="skills" data-tooltip="Skills">
+                    <svg class="icon"><use href="#icon-clock"/></svg>
+                </button>
+                <button type="button" class="dock-item" data-open="resume" data-tooltip="Resume">
+                    <svg class="icon"><use href="#icon-doc"/></svg>
+                </button>
+                <span class="dock-divider" aria-hidden="true"></span>
+                <a class="dock-item" href="https://github.com/shreyahalder01" target="_blank" rel="noopener" data-tooltip="GitHub">
+                    <svg class="icon"><use href="#icon-github"/></svg>
+                </a>
+                <a class="dock-item" href="https://www.linkedin.com/in/shreya-halder" target="_blank" rel="noopener" data-tooltip="LinkedIn">
+                    <svg class="icon"><use href="#icon-linkedin"/></svg>
+                </a>
+                <button type="button" class="dock-item" data-open="contact" data-tooltip="Mail">
+                    <svg class="icon"><use href="#icon-mail"/></svg>
                 </button>
             </div>
-        </div>
-    </nav>
-    <div class="nav-backdrop" id="nav-backdrop"></div>
+        </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <p class="hero-eyebrow"><span class="status-dot"></span>Open to opportunities</p>
-                    <h1>Hi, I'm <span class="highlight">Shreya Halder</span></h1>
-                    <p class="hero-subtitle">MCA Student &amp; Web Developer</p>
-                    <p class="hero-description">Passionate about learning and creating innovative solutions</p>
-                    <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                        <a href="./assets/Shreya_Halder_Resume.pdf" class="btn btn-secondary" download>Download CV</a>
-                    </div>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/shreya-halder" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
-                        <a href="https://github.com/shreyahalder01" target="_blank" rel="noopener" class="social-link">GitHub</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <div class="frame">
-                        <span class="frame-corner tl"></span>
-                        <span class="frame-corner tr"></span>
-                        <span class="frame-corner bl"></span>
-                        <span class="frame-corner br"></span>
-                        <img src="./assets/profile-pic.jpg" alt="Shreya Halder" class="profile-img">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-head reveal">
-                <p class="eyebrow">Profile</p>
-                <h2 class="section-title">About Me</h2>
-            </div>
-            <div class="about-content reveal">
-                <div class="about-text">
-                    <p>Hi, I'm Shreya — a developer based in Lucknow, India, with a BCA (9.01 CGPA) and currently pursuing my MCA. I work at the intersection of AI evaluation, data quality, and full-stack development, from validating API outputs and refining AI prompts to building projects like Morphix, a mixed-media video studio with a pluggable AI pipeline, and Cyanotype, a browser-based photo-to-sun-print tool.
-I care about getting the details right — clean data, consistent outputs, and AI systems you can actually trust.</p>
-                    <dl class="spec-sheet">
-                        <div class="spec-row">
-                            <dt>Education</dt>
-                            <dd>MCA (Master's Degree)</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>Experience</dt>
-                            <dd>Fresher</dd>
-                        </div>
-                        <div class="spec-row">
-                            <dt>Graduating</dt>
-                            <dd>2028</dd>
-                        </div>
-                    </dl>
-                </div>
-                <div class="about-image">
-                    <div class="frame">
-                        <span class="frame-corner tl"></span>
-                        <span class="frame-corner tr"></span>
-                        <span class="frame-corner bl"></span>
-                        <span class="frame-corner br"></span>
-                        <img src="./assets/about-pic.jpg" alt="About Shreya" class="about-img">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <div class="section-head reveal">
-                <p class="eyebrow">Selected Work</p>
-                <h2 class="section-title">My Projects</h2>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <span class="project-status">Repository</span>
-                        <img src="./assets/morphix.png" alt="Morphix">
-                    </div>
-                    <div class="project-content">
-                        <h3>Morphix</h3>
-                        <p>A Next.js-based mixed-media studio for uploading source video, choosing styles, and generating AI-assisted visual outputs.</p>
-                        <div class="project-tech">
-                            <span class="tech-label">stack:</span>
-                            <span class="tech-tag">Next.js</span>
-                            <span class="tech-tag">TypeScript</span>
-                            <span class="tech-tag">Python</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/shreyahalder01/Morphix" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <span class="project-status">Live</span>
-                        <img src="./assets/cyanotype.png" alt="Cyanotype">
-                    </div>
-                    <div class="project-content">
-                        <h3>Cyanotype</h3>
-                        <p>A client-side image-processing tool that transforms photographs into cyanotype-style sun-prints, with adjustable exposure, toning, and paper-edge controls, plus real-time preview rendering.</p>
-                        <div class="project-tech">
-                            <span class="tech-label">stack:</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/shreyahalder01/cyanotype" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
-                            <a href="https://shreyahalder01.github.io/cyanotype/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <span class="project-status">Live</span>
-                        <img src="./assets/aerophone.png" alt="Aerophone">
-                    </div>
-                    <div class="project-content">
-                        <h3>Aerophone</h3>
-                        <p>A modern project showcasing interactive web experiences and polished UI design with a focus on creative digital products.</p>
-                        <div class="project-tech">
-                            <span class="tech-label">stack:</span>
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/shreyahalder01/Aerophone" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
-                            <a href="https://shreyahalder01.github.io/Aerophone/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <span class="project-status">Live</span>
-                        <img src="./assets/project-1.png" alt="Weather App">
-                    </div>
-                    <div class="project-content">
-                        <h3>Weather App</h3>
-                        <p>A responsive weather application built with HTML, CSS, and JavaScript that provides real-time weather information for any city.</p>
-                        <div class="project-tech">
-                            <span class="tech-label">stack:</span>
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/shreyahalder01/Weather-App" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
-                            <a href="https://shreyahalder01.github.io/Weather-App/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <span class="project-status">Live</span>
-                        <img src="./assets/project-2.png" alt="Instagram Clone">
-                    </div>
-                    <div class="project-content">
-                        <h3>Instagram Clone</h3>
-                        <p>A pixel-perfect clone of Instagram's user interface created using HTML and CSS, showcasing advanced styling techniques.</p>
-                        <div class="project-tech">
-                            <span class="tech-label">stack:</span>
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">Flexbox</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/shreyahalder01/Instagram-clone-using-HTML-and-CSS" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
-                            <a href="https://shreyahalder01.github.io/Instagram-clone-using-HTML-and-CSS/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <span class="project-status">Live</span>
-                        <img src="./assets/project-3.png" alt="Snake Game">
-                    </div>
-                    <div class="project-content">
-                        <h3>Snake Game</h3>
-                        <p>A classic Snake game implemented in JavaScript with smooth controls and score tracking functionality.</p>
-                        <div class="project-tech">
-                            <span class="tech-label">stack:</span>
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/shreyahalder01/snake-game" target="_blank" rel="noopener" class="btn btn-secondary">GitHub</a>
-                            <a href="https://shreyahalder01.github.io/snake-game/" target="_blank" rel="noopener" class="btn btn-primary">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-<!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-head reveal">
-                <p class="eyebrow">Capabilities</p>
-                <h2 class="section-title">My Skills</h2>
-            </div>
-            <div class="skills-content">
-                <div class="skills-category reveal">
-                    <h3>Technical Skills</h3>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Python</span>
-                            <span class="skill-percentage">30%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="30"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">HTML</span>
-                            <span class="skill-percentage">70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="70"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">CSS</span>
-                            <span class="skill-percentage">65%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="65"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">JavaScript</span>
-                            <span class="skill-percentage">55%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="55"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Java</span>
-                            <span class="skill-percentage">50%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="50"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">C Programming</span>
-                            <span class="skill-percentage">60%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="60"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skills-category reveal">
-                    <h3>Soft Skills</h3>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Communication</span>
-                            <span class="skill-percentage">100%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="100"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Creative Writing</span>
-                            <span class="skill-percentage">80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="80"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Problem Solving</span>
-                            <span class="skill-percentage">90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="90"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info">
-                            <span class="skill-name">Team Collaboration</span>
-                            <span class="skill-percentage">100%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" data-progress="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-head reveal">
-                <p class="eyebrow">Say Hello</p>
-                <h2 class="section-title">Get In Touch</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info reveal">
-                    <div class="contact-item">
-                        <strong>Email</strong>
-                        <a href="mailto:shreyahalder013@gmail.com">shreyahalder013@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <strong>LinkedIn</strong>
-                        <a href="https://www.linkedin.com/in/shreya-halder/" target="_blank" rel="noopener">linkedin.com/in/shreya-halder</a>
-                    </div>
-                    <div class="contact-item">
-                        <strong>GitHub</strong>
-                        <a href="https://github.com/shreyahalder01" target="_blank" rel="noopener">github.com/shreyahalder01</a>
-                    </div>
-                </div>
-                <div class="contact-form reveal">
-                    <form id="contactForm" novalidate>
-                        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder=" " required>
-                            <label for="name">Your Name</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder=" " required>
-                            <label for="email">Your Email</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder=" " required>
-                            <label for="subject">Subject</label>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
-                            <label for="message">Your Message</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-inner">
-            <p>&copy; <span id="year">2025</span> Shreya Halder. All rights reserved.</p>
-            <p class="footer-meta">Built with intention.</p>
-        </div>
-    </footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
 </body>
