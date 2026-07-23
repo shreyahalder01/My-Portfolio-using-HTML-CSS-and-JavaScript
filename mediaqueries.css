@@ -94,6 +94,14 @@
         display: none;
     }
 
+    .status-chip--battery .battery-label {
+        display: none;
+    }
+
+    .clock-meta {
+        display: none;
+    }
+
     .desktop-icons {
         top: 66px;
         left: 12px;
@@ -202,5 +210,31 @@
     .icon-label {
         font-size: 0.62rem;
         padding: 1px 5px;
+    }
+
+    .spotlight-dialog {
+        width: 95vw;
+        margin-top: 10px;
+    }
+
+    .control-center-panel {
+        width: calc(100vw - 24px);
+        right: 12px;
+        top: 48px;
+    }
+
+    .projects-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .projects-filter-tags {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .resize-handle {
+        display: none;
     }
 }
